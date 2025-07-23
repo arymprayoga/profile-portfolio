@@ -71,5 +71,5 @@ tabs:
           -
             handle: meta_keywords
             field:
-              type: tags
+              type: text
               display: Meta Keywords

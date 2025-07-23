@@ -201,23 +201,69 @@ h3 {
   color: #ff0066;
 }
 
-/* Code blocks */
+/* Radical Code blocks */
 pre, code {
   font-family: var(--font-family-mono);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ff0066 !important;
+  font-weight: 600;
 }
 
 pre {
-  padding: 1rem;
+  padding: 1.5rem !important;
   overflow-x: auto;
-  border-radius: var(--border-radius-subtle);
+  margin: 1rem 0;
+  position: relative;
+  box-shadow: 4px 4px 0px rgba(255, 0, 102, 0.3);
+}
+
+/* Add radical corner accent to code blocks */
+pre::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 12px;
+  height: 12px;
+  background: #ff0066;
+  transform: rotate(45deg);
 }
 
 code {
-  padding: 0.2rem 0.4rem;
-  border-radius: var(--border-radius-subtle);
-  font-size: 0.9em;
+  padding: 0.3rem 0.6rem !important;
+  font-size: 0.85em;
+  font-weight: bold;
+  display: inline-block;
+  transform: rotate(-1deg);
+  transition: transform 0.2s ease;
+}
+
+code:hover {
+  transform: rotate(0deg);
+}
+
+/* Inline code in prose */
+.prose code {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 1px solid #ff0066 !important;
+  padding: 0.2rem 0.4rem !important;
+  font-weight: bold !important;
+}
+
+/* Code blocks in articles */
+article pre {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ff0066 !important;
+  margin: 1.5rem 0 !important;
+}
+
+article code {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 1px solid #ff0066 !important;
 }
 
 /* Animations */
@@ -424,6 +470,128 @@ article h6,
 .text-gray-600 {
   color: #4b5563 !important;
   background: transparent !important;
+}
+
+/* BLOG PAGE RADICAL FIXES */
+
+/* Ensure all blog text is visible with proper contrast */
+.blog-page,
+.blog-page * {
+  color: #000000 !important;
+}
+
+.blog-page code,
+.blog-page pre,
+.blog-page .bg-black,
+.blog-page .bg-black * {
+  color: #ffffff !important;
+}
+
+/* Blog specific prose styling */
+.blog-page .prose {
+  color: #000000 !important;
+}
+
+.blog-page .prose h1,
+.blog-page .prose h2,
+.blog-page .prose h3,
+.blog-page .prose h4,
+.blog-page .prose h5,
+.blog-page .prose h6 {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+
+.blog-page .prose p {
+  color: #000000 !important;
+  font-weight: 500 !important;
+}
+
+.blog-page .prose strong {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+
+/* Blockquotes in radical style */
+.blog-page .prose blockquote {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border-left: 8px solid #ff0066 !important;
+  padding: 1.5rem !important;
+  margin: 2rem 0 !important;
+  position: relative;
+  transform: rotate(-0.5deg);
+}
+
+.blog-page .prose blockquote::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 16px;
+  height: 16px;
+  background: #ff0066;
+  transform: rotate(45deg);
+}
+
+/* Lists in radical style */
+.blog-page .prose ul,
+.blog-page .prose ol {
+  color: #000000 !important;
+}
+
+.blog-page .prose li {
+  color: #000000 !important;
+  font-weight: 500 !important;
+  position: relative;
+  padding-left: 1rem;
+}
+
+.blog-page .prose ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.7em;
+  width: 8px;
+  height: 8px;
+  background: #ff0066;
+  transform: rotate(45deg);
+}
+
+/* Tables in radical style */
+.blog-page .prose table {
+  border: 2px solid #000000 !important;
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.3);
+}
+
+.blog-page .prose th {
+  background: #000000 !important;
+  color: #ffffff !important;
+  font-weight: 900 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: 2px solid #000000 !important;
+}
+
+.blog-page .prose td {
+  border: 1px solid #000000 !important;
+  color: #000000 !important;
+  font-weight: 500 !important;
+}
+
+/* Links in prose */
+.blog-page .prose a {
+  color: #ff0066 !important;
+  text-decoration: none !important;
+  font-weight: bold !important;
+  border-bottom: 2px solid #ff0066 !important;
+  transition: all 0.2s ease;
+}
+
+.blog-page .prose a:hover {
+  background: #ff0066 !important;
+  color: #ffffff !important;
+  transform: rotate(-1deg);
 }
 
 /* RADICAL PROJECT PAGE STYLES */
