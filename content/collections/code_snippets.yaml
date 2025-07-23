@@ -1,0 +1,11 @@
+title: Code Snippets
+structure:
+  root: false
+dated: true
+past_date_behavior: public
+future_date_behavior: private
+sort_dir: desc
+blueprint: code_snippet
+route: /snippets/{slug}
+taxonomies:
+  - programming_languages

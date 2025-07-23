@@ -1,0 +1,111 @@
+title: Profile
+tabs:
+  personal:
+    display: Personal Info
+    sections:
+      -
+        fields:
+          -
+            handle: full_name
+            field:
+              type: text
+              required: true
+              display: Full Name
+          -
+            handle: job_title
+            field:
+              type: text
+              required: true  
+              display: Job Title
+          -
+            handle: location
+            field:
+              type: text
+              display: Location
+          -
+            handle: phone
+            field:
+              type: text
+              display: Phone Number
+          -
+            handle: email
+            field:
+              type: text
+              required: true
+              display: Email Address
+          -
+            handle: linkedin
+            field:
+              type: text
+              display: LinkedIn URL
+          -
+            handle: github
+            field:
+              type: text
+              display: GitHub URL
+          -
+            handle: website
+            field:
+              type: text
+              display: Personal Website
+          -
+            handle: profile_image
+            field:
+              type: assets
+              display: Profile Image
+              max_files: 1
+              container: assets
+  professional:
+    display: Professional
+    sections:
+      -
+        fields:
+          -
+            handle: career_summary
+            field:
+              type: textarea
+              display: Career Summary
+              instructions: Brief overview of your professional experience
+          -
+            handle: bio
+            field:
+              type: markdown
+              display: Professional Bio
+              instructions: Detailed professional biography
+          -
+            handle: skills
+            field:
+              type: tags
+              display: Core Skills
+              instructions: Main technical skills and expertise
+          -
+            handle: principles
+            field:
+              type: tags
+              display: Work Principles
+              instructions: Your professional principles and methodologies
+  education:
+    display: Education
+    sections:
+      -
+        fields:
+          -
+            handle: degree
+            field:
+              type: text
+              display: Degree
+          -
+            handle: university
+            field:
+              type: text
+              display: University
+          -
+            handle: gpa
+            field:
+              type: text
+              display: GPA
+          -
+            handle: years
+            field:
+              type: text
+              display: Years Attended

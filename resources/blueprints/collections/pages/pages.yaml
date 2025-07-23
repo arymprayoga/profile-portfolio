@@ -1,0 +1,19 @@
+title: Pages
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              required: true
+              display: Page Title
+          -
+            handle: content
+            field:
+              type: markdown
+              display: Content
+              required: true

@@ -1,0 +1,10 @@
+title: Projects
+structure:
+  root: false
+dated: true
+past_date_behavior: public
+future_date_behavior: private
+sort_dir: desc
+blueprint: project
+route: /projects/{slug}
+template: project

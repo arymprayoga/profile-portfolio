@@ -1,0 +1,306 @@
+{{ layout = 'layout' }}
+
+<div class="relative overflow-hidden">
+    <!-- Hero Section with Radical Design -->
+    <section class="relative min-h-[70vh] project-hero-bg text-white overflow-hidden">
+        <!-- Animated Background Elements -->
+        <div class="absolute inset-0">
+            <div class="bg-element absolute top-10 left-10 w-32 h-32 bg-accent rotate-45 opacity-20"></div>
+            <div class="bg-element absolute top-1/2 right-20 w-24 h-24 border-4 border-accent rotate-12 opacity-30"></div>
+            <div class="bg-element absolute bottom-20 left-1/3 w-16 h-16 bg-white rotate-45 opacity-10"></div>
+            <div class="bg-element absolute top-1/4 left-1/2 w-2 h-40 bg-accent transform -rotate-12 opacity-40"></div>
+        </div>
+        
+        <!-- Main Hero Content -->
+        <div class="relative z-10 max-w-7xl mx-auto px-6 py-20">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Left: Project Info -->
+                <div class="space-y-8">
+                    <!-- Status & Type Badges -->
+                    <div class="flex flex-wrap gap-4">
+                        <span class="px-4 py-2 bg-accent text-white font-bold uppercase tracking-wider text-sm border-2 border-accent">
+                            {{ status | title }}
+                        </span>
+                        <span class="px-4 py-2 border-2 border-white text-white font-bold uppercase tracking-wider text-sm hover:bg-white hover:text-black transition-all">
+                            {{ project_type | title | replace:'_':' ' }}
+                        </span>
+                    </div>
+                    
+                    <!-- Title with Radical Typography -->
+                    <div class="space-y-4 reveal-on-scroll">
+                        <h1 class="text-5xl lg:text-7xl font-black uppercase tracking-tight leading-none glitch-effect">
+                            <span class="block text-white">{{ title }}</span>
+                        </h1>
+                        <p class="text-xl lg:text-2xl project-subtitle font-light leading-relaxed">
+                            {{ subtitle }}
+                        </p>
+                    </div>
+                    
+                    <!-- Action Buttons -->
+                    <div class="flex flex-wrap gap-4 reveal-on-scroll">
+                        {{ if live_url }}
+                            <a href="{{ live_url }}" target="_blank" class="radical-button neon-glow group relative px-8 py-4 bg-accent text-white font-bold uppercase tracking-wider border-2 border-accent hover:bg-transparent hover:text-accent transition-all duration-300">
+                                <span class="relative z-10">Live Demo</span>
+                            </a>
+                        {{ /if }}
+                        {{ if github_url }}
+                            <a href="{{ github_url }}" target="_blank" class="radical-button magnetic-button px-8 py-4 border-2 border-white text-white font-bold uppercase tracking-wider hover:bg-white hover:text-black transition-all duration-300">
+                                Source Code
+                            </a>
+                        {{ /if }}
+                    </div>
+                </div>
+                
+                <!-- Right: Featured Image with Radical Frame -->
+                <div class="lg:order-2 reveal-on-scroll">
+                    {{ if featured_image }}
+                        <div class="relative group image-overlay">
+                            <!-- Geometric Frame -->
+                            <div class="absolute -inset-4 bg-accent opacity-20 transform rotate-1 group-hover:rotate-2 transition-transform duration-500"></div>
+                            <div class="absolute -inset-2 border-2 border-white transform -rotate-1 group-hover:-rotate-2 transition-transform duration-500"></div>
+                            
+                            <!-- Image -->
+                            <div class="relative overflow-hidden">
+                                <img src="{{ featured_image }}" alt="{{ title }}" class="w-full h-80 lg:h-96 object-cover">
+                                <div class="absolute inset-0 bg-gradient-to-tr from-black/30 to-transparent"></div>
+                            </div>
+                        </div>
+                    {{ else }}
+                        <!-- Fallback Graphic Element -->
+                        <div class="relative h-80 lg:h-96 bg-gray-800 border-2 border-accent flex items-center justify-center neon-glow">
+                            <div class="text-6xl font-black text-accent opacity-50 glitch-effect">{{ title | truncate:1:'' | upper }}</div>
+                        </div>
+                    {{ /if }}
+                </div>
+            </div>
+        </div>
+        
+        <!-- Bottom Geometric Separator -->
+        <div class="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-r from-accent to-transparent transform skew-y-1 origin-bottom-left"></div>
+    </section>
+
+    <!-- Technologies Section with Radical Grid -->
+    <section class="py-16 bg-white relative">
+        <div class="absolute top-0 left-0 w-full h-1 bg-accent"></div>
+        
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="mb-12">
+                <h2 class="text-4xl font-black uppercase tracking-tight mb-4 geometric-accent">Technologies</h2>
+                <div class="w-20 h-1 bg-black"></div>
+            </div>
+            
+            <!-- Tech Stack with Radical Cards -->
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+                {{ technologies }}
+                    <div class="tech-card group relative reveal-on-scroll">
+                        <!-- Background geometric shapes -->
+                        <div class="absolute inset-0 bg-black transform rotate-2 group-hover:rotate-3 transition-transform duration-300"></div>
+                        <div class="absolute inset-0 bg-accent transform -rotate-1 group-hover:-rotate-2 transition-transform duration-300"></div>
+                        
+                        <!-- Tech card -->
+                        <div class="relative bg-white border-2 border-black p-4 text-center">
+                            <span class="font-bold text-sm uppercase tracking-wider text-black">{{ value }}</span>
+                        </div>
+                    </div>
+                {{ /technologies }}
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content with Radical Typography -->
+    <section class="py-20 bg-gray-50 relative overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute top-0 right-0 w-64 h-64 bg-accent opacity-5 transform rotate-45"></div>
+        <div class="absolute bottom-0 left-0 w-32 h-32 border-4 border-black opacity-10 transform -rotate-12"></div>
+        
+        <div class="max-w-4xl mx-auto px-6 relative z-10">
+            <!-- Content with Radical Styling -->
+            <div class="prose prose-lg max-w-none">
+                <div class="space-y-12 reveal-on-scroll">
+                    {{ content | markdown }}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats/Metrics Section (if applicable) -->
+    {{ if live_url }}
+    <section class="py-16 bg-black text-white relative overflow-hidden">
+        <!-- Animated Background -->
+        <div class="absolute inset-0">
+            <div class="absolute top-1/4 left-10 w-2 h-20 bg-accent animate-pulse"></div>
+            <div class="absolute bottom-1/4 right-20 w-16 h-16 border-2 border-accent rotate-45 opacity-50"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-black uppercase tracking-tight mb-4">Project Impact</h2>
+                <div class="w-20 h-1 bg-accent mx-auto"></div>
+            </div>
+            
+            <!-- Impact Metrics -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center group">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-accent transform rotate-3 group-hover:rotate-6 transition-transform"></div>
+                        <div class="relative bg-white text-black p-8 border-2 border-accent">
+                            <div class="text-4xl font-black text-accent mb-2">LIVE</div>
+                            <div class="font-bold uppercase tracking-wider">Production Ready</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center group">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-white transform -rotate-2 group-hover:-rotate-4 transition-transform"></div>
+                        <div class="relative bg-accent text-white p-8 border-2 border-white">
+                            <div class="text-4xl font-black mb-2">{{ technologies | count }}</div>
+                            <div class="font-bold uppercase tracking-wider">Technologies</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center group">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-accent transform rotate-1 group-hover:rotate-3 transition-transform"></div>
+                        <div class="relative bg-white text-black p-8 border-2 border-accent">
+                            <div class="text-4xl font-black text-accent mb-2">{{ date format="Y" }}</div>
+                            <div class="font-bold uppercase tracking-wider">Launched</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {{ /if }}
+
+    <!-- Call to Action -->
+    <section class="py-20 bg-white relative">
+        <div class="absolute inset-0 bg-gradient-to-br from-gray-50 to-white"></div>
+        
+        <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+            <h2 class="text-4xl lg:text-5xl font-black uppercase tracking-tight mb-8 geometric-accent">
+                Ready to Build Something?
+            </h2>
+            
+            <p class="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
+                This project showcases my ability to build scalable, production-ready applications. Let's discuss your next project.
+            </p>
+            
+            <div class="flex flex-wrap gap-6 justify-center">
+                <a href="/about" class="group relative px-8 py-4 bg-accent text-white font-bold uppercase tracking-wider border-2 border-accent overflow-hidden">
+                    <span class="relative z-10">View More Projects</span>
+                    <div class="absolute inset-0 bg-black transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
+                </a>
+                
+                <a href="/contact" class="px-8 py-4 border-2 border-black text-black font-bold uppercase tracking-wider hover:bg-black hover:text-white transition-all duration-300">
+                    Get In Touch
+                </a>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+// Radical Project Page Interactions
+document.addEventListener('DOMContentLoaded', function() {
+    // Scroll reveal animation
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+            }
+        });
+    }, observerOptions);
+    
+    // Observe all reveal elements
+    document.querySelectorAll('.reveal-on-scroll').forEach(el => {
+        observer.observe(el);
+    });
+    
+    // Magnetic button effect
+    document.querySelectorAll('.magnetic-button').forEach(button => {
+        button.addEventListener('mousemove', function(e) {
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            
+            const moveX = x * 0.15;
+            const moveY = y * 0.15;
+            
+            this.style.setProperty('--mouse-x', moveX + 'px');
+            this.style.setProperty('--mouse-y', moveY + 'px');
+        });
+        
+        button.addEventListener('mouseleave', function() {
+            this.style.setProperty('--mouse-x', '0px');
+            this.style.setProperty('--mouse-y', '0px');
+        });
+    });
+    
+    // Parallax effect on scroll
+    window.addEventListener('scroll', function() {
+        const scrolled = window.pageYOffset;
+        const parallaxElements = document.querySelectorAll('.parallax-element');
+        
+        parallaxElements.forEach(element => {
+            const speed = element.dataset.speed || 0.5;
+            const yPos = -(scrolled * speed);
+            element.style.transform = `translateY(${yPos}px)`;
+        });
+        
+        // Floating background elements parallax
+        const bgElements = document.querySelectorAll('.bg-element');
+        bgElements.forEach((element, index) => {
+            const speed = 0.2 + (index * 0.1);
+            const yPos = scrolled * speed;
+            element.style.transform = `translateY(${yPos}px) rotate(${scrolled * 0.02}deg)`;
+        });
+    });
+    
+    // Add stagger animation to tech cards
+    const techCards = document.querySelectorAll('.tech-card');
+    techCards.forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.1}s`;
+    });
+    
+    // Enhanced button hover effects
+    document.querySelectorAll('.radical-button').forEach(button => {
+        button.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-3px) scale(1.05)';
+            this.style.boxShadow = '0 15px 30px rgba(0,0,0,0.4)';
+        });
+        
+        button.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+            this.style.boxShadow = 'none';
+        });
+    });
+    
+    // Typing animation for headings (if needed)
+    const typingElements = document.querySelectorAll('.typing-animation');
+    typingElements.forEach(element => {
+        const text = element.textContent;
+        element.textContent = '';
+        element.style.width = '0';
+        
+        setTimeout(() => {
+            let i = 0;
+            const typeWriter = setInterval(() => {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                } else {
+                    clearInterval(typeWriter);
+                    element.style.borderRight = 'none';
+                }
+            }, 100);
+        }, 500);
+    });
+});
+</script>

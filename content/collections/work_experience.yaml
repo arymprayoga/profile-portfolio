@@ -1,0 +1,8 @@
+title: Work Experience
+structure:
+  root: false
+dated: true
+past_date_behavior: public
+future_date_behavior: private
+sort_dir: desc
+blueprint: work_experience

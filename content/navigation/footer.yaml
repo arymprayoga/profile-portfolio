@@ -1,0 +1,32 @@
+tree:
+  -
+    title: Professional
+    children:
+      -
+        title: Resume
+        url: /resume
+      -
+        title: Projects
+        url: /projects
+      -
+        title: LinkedIn
+        url: https://linkedin.com/in/arymprayoga
+        target: _blank
+  -
+    title: Content
+    children:
+      -
+        title: Blog
+        url: /blog
+      -
+        title: Code Snippets
+        url: /snippets
+  -
+    title: Connect
+    children:
+      -
+        title: Contact
+        url: /contact
+      -
+        title: Email
+        url: mailto:arymp111@gmail.com

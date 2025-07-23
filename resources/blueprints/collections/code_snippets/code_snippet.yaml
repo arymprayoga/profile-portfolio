@@ -1,0 +1,82 @@
+title: Code Snippet
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              required: true
+              display: Title
+          -
+            handle: description
+            field:
+              type: textarea
+              display: Description
+              instructions: Brief description of what this code does
+          -
+            handle: code
+            field:
+              type: code
+              display: Code
+              required: true
+              theme: material
+              mode_selectable: true
+              mode_default: php
+              line_numbers: true
+              line_wrapping: true
+          -
+            handle: language
+            field:
+              type: select
+              display: Primary Language
+              options:
+                php: PHP
+                javascript: JavaScript
+                python: Python
+                go: Go
+                ruby: Ruby
+                sql: SQL
+                html: HTML
+                css: CSS
+                shell: Shell/Bash
+                yaml: YAML
+                json: JSON
+                other: Other
+          -
+            handle: programming_languages
+            field:
+              type: terms
+              display: Programming Languages
+              taxonomies:
+                - programming_languages
+          -
+            handle: difficulty
+            field:
+              type: select
+              display: Difficulty Level
+              options:
+                beginner: Beginner
+                intermediate: Intermediate
+                advanced: Advanced
+          -
+            handle: use_cases
+            field:
+              type: tags
+              display: Use Cases
+              instructions: When/where this code snippet would be useful
+          -
+            handle: is_featured
+            field:
+              type: toggle
+              display: Featured Snippet
+              default: false
+          -
+            handle: external_link
+            field:
+              type: text
+              display: External Link
+              instructions: Link to GitHub, CodePen, etc.

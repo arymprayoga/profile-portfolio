@@ -1,0 +1,29 @@
+tree:
+  -
+    entry: home
+    title: Home
+    url: /
+  -
+    entry: about
+    title: About
+    url: /about
+  -
+    entry: resume
+    title: Resume
+    url: /resume
+  -
+    entry: projects
+    title: Projects
+    url: /projects
+  -
+    entry: blog
+    title: Blog
+    url: /blog
+  -
+    entry: snippets
+    title: Code Snippets
+    url: /snippets
+  -
+    entry: contact
+    title: Contact
+    url: /contact

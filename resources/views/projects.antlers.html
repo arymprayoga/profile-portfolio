@@ -1,0 +1,102 @@
+{{ layout = 'layout' }}
+
+<div class="max-w-6xl mx-auto">
+    <!-- Page Header -->
+    <header class="text-center mb-12">
+        <h1 class="geometric-accent mb-4">{{ title }}</h1>
+        <div class="w-24 h-1 bg-accent mx-auto mb-6"></div>
+        <div class="prose prose-lg max-w-2xl mx-auto">
+            {{ content }}
+        </div>
+    </header>
+
+    <!-- Featured Projects -->
+    <section class="mb-16">
+        <h2 class="text-3xl font-bold mb-8 geometric-accent">Featured Projects</h2>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {{ collection:projects sort="date:desc" is_featured:is="true" }}
+                <article class="card-sharp hover:transform hover:-translate-y-1 transition-all duration-300">
+                    {{ if featured_image }}
+                        <div class="mb-6">
+                            <img src="{{ featured_image }}" alt="{{ title }}" class="w-full h-64 object-cover rounded">
+                        </div>
+                    {{ /if }}
+                    
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="px-3 py-1 bg-accent text-white text-sm rounded-full">{{ project_type | title }}</span>
+                        <span class="px-3 py-1 bg-gray-100 text-sm rounded-full">{{ status | title }}</span>
+                    </div>
+                    
+                    <h3 class="text-2xl font-bold mb-2">{{ title }}</h3>
+                    <p class="text-lg text-gray-600 mb-4">{{ subtitle }}</p>
+                    
+                    <div class="prose mb-6">
+                        {{ description | truncate:200 }}
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        {{ technologies }}
+                            <span class="px-2 py-1 bg-gray-100 text-sm rounded">{{ value }}</span>
+                        {{ /technologies }}
+                    </div>
+                    
+                    <div class="flex gap-4">
+                        {{ if live_url }}
+                            <a href="{{ live_url }}" target="_blank" class="button-accent">Live Demo</a>
+                        {{ /if }}
+                        {{ if github_url }}
+                            <a href="{{ github_url }}" target="_blank" class="button-sharp">Source Code</a>
+                        {{ /if }}
+                        <a href="{{ url }}" class="text-accent font-medium hover:underline">Learn More →</a>
+                    </div>
+                </article>
+            {{ /collection:projects }}
+        </div>
+    </section>
+
+    <!-- All Projects -->
+    <section class="mb-16">
+        <h2 class="text-3xl font-bold mb-8 geometric-accent">All Projects</h2>
+        
+        <!-- Filter by Technology (Future Enhancement) -->
+        <div class="mb-8 text-center">
+            <p class="text-gray-600">Filter functionality coming soon...</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {{ collection:projects sort="date:desc" }}
+                <article class="card-sharp hover:transform hover:-translate-y-1 transition-all duration-300">
+                    {{ if featured_image }}
+                        <img src="{{ featured_image }}" alt="{{ title }}" class="w-full h-48 object-cover mb-4 rounded">
+                    {{ /if }}
+                    
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="px-2 py-1 bg-gray-100 text-xs rounded">{{ project_type | title }}</span>
+                        <time class="text-sm text-gray-500">{{ date format="Y" }}</time>
+                    </div>
+                    
+                    <h3 class="text-xl font-bold mb-2">{{ title }}</h3>
+                    <p class="text-gray-600 mb-4">{{ subtitle }}</p>
+                    
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        {{ technologies limit="3" }}
+                            <span class="px-2 py-1 bg-gray-100 text-xs rounded">{{ value }}</span>
+                        {{ /technologies }}
+                    </div>
+                    
+                    <div class="flex justify-between items-center">
+                        <a href="{{ url }}" class="text-accent font-medium hover:underline">View Details</a>
+                        <div class="flex gap-2">
+                            {{ if live_url }}
+                                <a href="{{ live_url }}" target="_blank" class="text-gray-600 hover:text-accent" title="Live Demo">🚀</a>
+                            {{ /if }}
+                            {{ if github_url }}
+                                <a href="{{ github_url }}" target="_blank" class="text-gray-600 hover:text-accent" title="Source Code">💻</a>
+                            {{ /if }}
+                        </div>
+                    </div>
+                </article>
+            {{ /collection:projects }}
+        </div>
+    </section>
+</div>

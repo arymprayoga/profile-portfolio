@@ -1,0 +1,89 @@
+{{ layout = 'layout' }}
+
+<!-- Hero Section -->
+<section class="min-h-[60vh] flex items-center justify-center text-center mb-16">
+    <div class="max-w-4xl mx-auto animate-slide-up">
+        <h1 class="geometric-accent mb-6">
+            {{ if hero_title }}{{ hero_title }}{{ else }}Hi, I'm {{ global:profile:full_name }}{{ /if }}
+        </h1>
+        <p class="text-xl md:text-2xl text-gray-600 mb-8 max-w-2xl mx-auto">
+            {{ hero_subtitle or global:profile:career_summary }}
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="/resume" class="button-sharp">View Resume</a>
+            <a href="/contact" class="button-accent">Get In Touch</a>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section class="mb-16">
+    <div class="prose prose-lg max-w-none">
+        {{ content }}
+    </div>
+</section>
+
+<!-- Featured Work Section -->
+{{if show_recent_work }}
+<section class="mb-16">
+    <h2 class="text-3xl font-bold mb-8 geometric-accent">Featured Projects</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {{ collection:projects limit="3" sort="date:desc" is_featured:is="true" }}
+            <article class="card-sharp hover:transform hover:-translate-y-1 transition-all duration-300">
+                {{ if featured_image }}
+                    <img src="{{ featured_image }}" alt="{{ title }}" class="w-full h-48 object-cover mb-4">
+                {{ /if }}
+                <h3 class="text-xl font-bold mb-2">{{ title }}</h3>
+                <p class="text-gray-600 mb-4">{{ subtitle }}</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    {{ technologies }}
+                        <span class="px-2 py-1 bg-gray-100 text-sm rounded">{{ value }}</span>
+                    {{ /technologies }}
+                </div>
+                <a href="{{ url }}" class="text-accent font-medium hover:underline">View Project →</a>
+            </article>
+        {{ /collection:projects }}
+    </div>
+    <div class="text-center mt-8">
+        <a href="/projects" class="button-sharp">View All Projects</a>
+    </div>
+</section>
+{{ /if }}
+
+<!-- Recent Blog Posts Section -->
+{{ if show_recent_posts }}
+<section class="mb-16">
+    <h2 class="text-3xl font-bold mb-8 geometric-accent">Latest Posts</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {{ collection:blog limit="4" sort="date:desc" }}
+            <article class="border-l-4 border-accent pl-6 hover:border-black transition-colors">
+                <time class="text-sm text-gray-500">{{ date format="F j, Y" }}</time>
+                <h3 class="text-xl font-bold mt-2 mb-3">
+                    <a href="{{ url }}" class="hover:text-accent transition-colors">{{ title }}</a>
+                </h3>
+                <p class="text-gray-600 mb-3">{{ excerpt }}</p>
+                <div class="flex flex-wrap gap-2">
+                    {{ tags limit="3" }}
+                        <span class="px-2 py-1 bg-gray-100 text-xs rounded">{{ title }}</span>
+                    {{ /tags }}
+                </div>
+            </article>
+        {{ /collection:blog }}
+    </div>
+    <div class="text-center mt-8">
+        <a href="/blog" class="button-sharp">Read More Posts</a>
+    </div>
+</section>
+{{ /if }}
+
+<!-- Skills & Technologies -->
+<section class="mb-16">
+    <h2 class="text-3xl font-bold mb-8 geometric-accent">Core Skills</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {{ global:profile:skills }}
+            <div class="text-center p-4 border border-gray-200 hover:border-accent transition-colors">
+                <span class="font-medium">{{ value }}</span>
+            </div>
+        {{ /global:profile:skills }}
+    </div>
+</section>

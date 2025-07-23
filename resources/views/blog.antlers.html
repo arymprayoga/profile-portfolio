@@ -1,0 +1,124 @@
+{{ layout = 'layout' }}
+
+<div class="max-w-6xl mx-auto">
+    <!-- Page Header -->
+    <header class="text-center mb-12">
+        <h1 class="geometric-accent mb-4">{{ title }}</h1>
+        <div class="w-24 h-1 bg-accent mx-auto mb-6"></div>
+        <div class="prose prose-lg max-w-2xl mx-auto">
+            {{ content }}
+        </div>
+    </header>
+
+    <!-- Featured Posts -->
+    <section class="mb-16">
+        <h2 class="text-3xl font-bold mb-8 geometric-accent">Featured Articles</h2>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {{ collection:blog sort="date:desc" is_featured:is="true" limit="2" }}
+                <article class="card-sharp hover:transform hover:-translate-y-1 transition-all duration-300">
+                    {{ if featured_image }}
+                        <img src="{{ featured_image }}" alt="{{ title }}" class="w-full h-64 object-cover mb-6 rounded">
+                    {{ /if }}
+                    
+                    <div class="flex items-center justify-between mb-4">
+                        <time class="text-sm text-gray-500">{{ date format="F j, Y" }}</time>
+                        <span class="px-3 py-1 bg-accent text-white text-sm rounded-full">Featured</span>
+                    </div>
+                    
+                    <h3 class="text-2xl font-bold mb-3">
+                        <a href="{{ url }}" class="hover:text-accent transition-colors">{{ title }}</a>
+                    </h3>
+                    
+                    <p class="text-gray-600 mb-4 leading-relaxed">{{ excerpt }}</p>
+                    
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        {{ categories limit="2" }}
+                            <span class="px-3 py-1 bg-gray-100 text-sm rounded-full">{{ title }}</span>
+                        {{ /categories }}
+                    </div>
+                    
+                    <div class="flex justify-between items-center">
+                        <a href="{{ url }}" class="text-accent font-medium hover:underline">Read More →</a>
+                        {{ if reading_time }}
+                            <span class="text-sm text-gray-500">{{ reading_time }} min read</span>
+                        {{ /if }}
+                    </div>
+                </article>
+            {{ /collection:blog }}
+        </div>
+    </section>
+
+    <!-- Recent Posts -->
+    <section class="mb-16">
+        <h2 class="text-3xl font-bold mb-8 geometric-accent">Recent Posts</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {{ collection:blog sort="date:desc" limit="9" }}
+                <article class="border-l-4 border-gray-200 pl-6 hover:border-accent transition-colors">
+                    <time class="text-sm text-gray-500">{{ date format="F j, Y" }}</time>
+                    
+                    <h3 class="text-xl font-bold mt-2 mb-3">
+                        <a href="{{ url }}" class="hover:text-accent transition-colors">{{ title }}</a>
+                    </h3>
+                    
+                    <p class="text-gray-600 mb-4">{{ excerpt | truncate:120 }}</p>
+                    
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        {{ tags limit="3" }}
+                            <span class="px-2 py-1 bg-gray-100 text-xs rounded">{{ title }}</span>
+                        {{ /tags }}
+                    </div>
+                    
+                    <div class="flex justify-between items-center">
+                        <a href="{{ url }}" class="text-accent text-sm font-medium hover:underline">Read Article</a>
+                        {{ if reading_time }}
+                            <span class="text-xs text-gray-500">{{ reading_time }} min</span>
+                        {{ /if }}
+                    </div>
+                </article>
+            {{ /collection:blog }}
+        </div>
+    </section>
+
+    <!-- Categories & Tags -->
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+        <!-- Categories -->
+        <div class="card-sharp">
+            <h3 class="text-xl font-bold mb-4 geometric-accent">Categories</h3>
+            <div class="space-y-2">
+                {{ taxonomy:categories }}
+                    <div class="flex justify-between items-center py-2 border-b border-gray-100 last:border-b-0">
+                        <a href="/blog/categories/{{ slug }}" class="hover:text-accent transition-colors">{{ title }}</a>
+                        <span class="text-sm text-gray-500">{{ entries | length }} posts</span>
+                    </div>
+                {{ /taxonomy:categories }}
+            </div>
+        </div>
+
+        <!-- Popular Tags -->
+        <div class="card-sharp">
+            <h3 class="text-xl font-bold mb-4 geometric-accent">Popular Tags</h3>
+            <div class="flex flex-wrap gap-2">
+                {{ taxonomy:tags }}
+                    <a href="/blog/tags/{{ slug }}" class="px-3 py-1 bg-gray-100 hover:bg-accent hover:text-white text-sm rounded-full transition-colors">
+                        {{ title }}
+                    </a>
+                {{ /taxonomy:tags }}
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Signup (Placeholder) -->
+    <section class="text-center bg-gray-50 -mx-4 md:-mx-8 px-4 md:px-8 py-16">
+        <h2 class="text-3xl font-bold mb-4">Stay Updated</h2>
+        <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+            Get notified when I publish new articles about software engineering, performance optimization, and system architecture.
+        </p>
+        <div class="max-w-md mx-auto">
+            <div class="flex gap-4">
+                <input type="email" placeholder="Enter your email" class="flex-1 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-accent">
+                <button class="button-accent">Subscribe</button>
+            </div>
+            <p class="text-sm text-gray-500 mt-2">No spam, unsubscribe anytime.</p>
+        </div>
+    </section>
+</div>

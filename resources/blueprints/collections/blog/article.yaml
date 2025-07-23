@@ -1,0 +1,75 @@
+title: Article
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              required: true
+              display: Title
+          -
+            handle: excerpt
+            field:
+              type: textarea
+              display: Excerpt
+              instructions: Brief summary of the article
+          -
+            handle: featured_image
+            field:
+              type: assets
+              display: Featured Image
+              max_files: 1
+              container: assets
+          -
+            handle: content
+            field:
+              type: markdown
+              display: Content
+              required: true
+          -
+            handle: categories
+            field:
+              type: terms
+              display: Categories
+              taxonomies:
+                - categories
+              max_items: 3
+          -
+            handle: tags
+            field:
+              type: terms
+              display: Tags
+              taxonomies:
+                - tags
+          -
+            handle: is_featured
+            field:
+              type: toggle
+              display: Featured Article
+              default: false
+          -
+            handle: reading_time
+            field:
+              type: integer
+              display: Reading Time (minutes)
+              instructions: Estimated reading time
+  seo:
+    display: SEO
+    sections:
+      -
+        fields:
+          -
+            handle: meta_description
+            field:
+              type: textarea
+              display: Meta Description
+              character_limit: 160
+          -
+            handle: meta_keywords
+            field:
+              type: tags
+              display: Meta Keywords

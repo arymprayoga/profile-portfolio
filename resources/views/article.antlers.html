@@ -1,0 +1,135 @@
+{{ layout = 'layout' }}
+
+<article class="max-w-4xl mx-auto">
+    <!-- Article Header -->
+    <header class="text-center mb-12">
+        <!-- Meta Info -->
+        <div class="flex flex-wrap justify-center items-center gap-4 mb-6 text-sm text-gray-600">
+            <time>{{ date format="F j, Y" }}</time>
+            {{ if reading_time }}
+                <span>{{ reading_time }} min read</span>
+            {{ /if }}
+            <div class="flex gap-2">
+                {{ categories limit="2" }}
+                    <span class="px-2 py-1 bg-gray-100 rounded text-xs">{{ title }}</span>
+                {{ /categories }}
+            </div>
+        </div>
+        
+        <!-- Title -->
+        <h1 class="geometric-accent mb-6">{{ title }}</h1>
+        
+        <!-- Excerpt -->
+        {{ if excerpt }}
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">{{ excerpt }}</p>
+        {{ /if }}
+        
+        <!-- Featured Image -->
+        {{ if featured_image }}
+            <div class="mt-8">
+                <img src="{{ featured_image }}" alt="{{ title }}" class="w-full h-64 md:h-96 object-cover rounded-lg shadow-lg">
+            </div>
+        {{ /if }}
+    </header>
+
+    <!-- Article Content -->
+    <div class="prose prose-lg max-w-none mb-12">
+        {{ content | markdown }}
+    </div>
+
+    <!-- Tags -->
+    {{ if tags }}
+        <section class="mb-12">
+            <h3 class="text-lg font-bold mb-4">Tags</h3>
+            <div class="flex flex-wrap gap-2">
+                {{ tags }}
+                    <a href="/blog/tags/{{ slug }}" class="px-3 py-1 bg-gray-100 hover:bg-accent hover:text-white text-sm rounded-full transition-colors">
+                        {{ title }}
+                    </a>
+                {{ /tags }}
+            </div>
+        </section>
+    {{ /if }}
+
+    <!-- Author Info -->
+    <section class="card-sharp mb-12">
+        <div class="flex flex-col md:flex-row items-start gap-6">
+            <div class="flex-shrink-0">
+                {{ if global:profile:profile_image }}
+                    <img src="{{ global:profile:profile_image }}" alt="{{ global:profile:full_name }}" class="w-20 h-20 rounded-full">
+                {{ else }}
+                    <div class="w-20 h-20 bg-accent rounded-full flex items-center justify-center text-white text-2xl font-bold">
+                        {{ global:profile:full_name | initials }}
+                    </div>
+                {{ /if }}
+            </div>
+            <div class="flex-1">
+                <h3 class="text-xl font-bold mb-2">{{ global:profile:full_name }}</h3>
+                <p class="text-gray-600 mb-4">{{ global:profile:bio }}</p>
+                <div class="flex gap-4">
+                    <a href="/about" class="text-accent hover:underline">About Me</a>
+                    <a href="{{ global:profile:linkedin }}" target="_blank" class="text-accent hover:underline">LinkedIn</a>
+                    <a href="/contact" class="text-accent hover:underline">Contact</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Posts -->
+    <section class="mb-12">
+        <h3 class="text-2xl font-bold mb-8 geometric-accent">Related Articles</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {{ relate:tags as="related" limit="4" }}
+                {{ related }}
+                    {{ unless id == entry.id }}
+                        <article class="border-l-4 border-gray-200 pl-6 hover:border-accent transition-colors">
+                            <time class="text-sm text-gray-500">{{ date format="F j, Y" }}</time>
+                            <h4 class="text-lg font-bold mt-2 mb-2">
+                                <a href="{{ url }}" class="hover:text-accent transition-colors">{{ title }}</a>
+                            </h4>
+                            <p class="text-gray-600 text-sm">{{ excerpt | truncate:100 }}</p>
+                        </article>
+                    {{ /unless }}
+                {{ /related }}
+            {{ /relate:tags }}
+        </div>
+    </section>
+
+    <!-- Navigation -->
+    <nav class="flex justify-between items-center mb-12">
+        {{ collection:blog as="posts" }}
+            {{ posts sort="date:asc" }}
+                {{ if id == entry.id }}
+                    {{ prev }}
+                        <div class="text-left">
+                            <p class="text-sm text-gray-500 mb-1">Previous Article</p>
+                            <a href="{{ url }}" class="text-accent hover:underline font-medium">
+                                {{ title | truncate:50 }}
+                            </a>
+                        </div>
+                    {{ /prev }}
+                    {{ next }}
+                        <div class="text-right">
+                            <p class="text-sm text-gray-500 mb-1">Next Article</p>
+                            <a href="{{ url }}" class="text-accent hover:underline font-medium">
+                                {{ title | truncate:50 }}
+                            </a>
+                        </div>
+                    {{ /next }}
+                {{ /if }}
+            {{ /posts }}
+        {{ /collection:blog }}
+    </nav>
+
+    <!-- Call to Action -->
+    <section class="text-center bg-gray-50 -mx-4 md:-mx-8 px-4 md:px-8 py-16">
+        <h3 class="text-2xl font-bold mb-4">Enjoyed this article?</h3>
+        <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+            If you found this helpful, you might enjoy my other articles on software engineering and system architecture.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="/blog" class="button-sharp">Read More Articles</a>
+            <a href="/contact" class="button-accent">Get In Touch</a>
+        </div>
+    </section>
+</article>

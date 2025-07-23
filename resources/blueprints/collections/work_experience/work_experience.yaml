@@ -1,0 +1,83 @@
+title: Work Experience
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              required: true
+              display: Job Title
+              instructions: e.g., Software Engineer
+          -
+            handle: company
+            field:
+              type: text
+              required: true
+              display: Company Name
+          -
+            handle: company_description
+            field:
+              type: text
+              display: Company Description
+              instructions: Brief description or industry
+          -
+            handle: location
+            field:
+              type: text
+              display: Location
+          -
+            handle: employment_type
+            field:
+              type: select
+              display: Employment Type
+              options:
+                full_time: Full Time
+                part_time: Part Time
+                contract: Contract
+                freelance: Freelance
+                internship: Internship
+              default: full_time
+          -
+            handle: start_date
+            field:
+              type: date
+              required: true
+              display: Start Date
+              mode: single
+              time_enabled: false
+          -
+            handle: end_date
+            field:
+              type: date
+              display: End Date
+              mode: single
+              time_enabled: false
+              instructions: Leave empty if current position
+          -
+            handle: is_current
+            field:
+              type: toggle
+              display: Current Position
+              default: false
+          -
+            handle: responsibilities
+            field:
+              type: markdown
+              display: Key Responsibilities
+              instructions: List your main achievements and responsibilities
+          -
+            handle: technologies
+            field:
+              type: tags
+              display: Technologies Used
+              instructions: Technologies, frameworks, and tools used
+          -
+            handle: order
+            field:
+              type: integer
+              display: Display Order
+              instructions: Lower numbers appear first

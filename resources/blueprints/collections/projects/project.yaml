@@ -1,0 +1,89 @@
+title: Projects
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              required: true
+              display: Project Title
+          -
+            handle: subtitle
+            field:
+              type: text
+              display: Subtitle
+              instructions: Brief project description
+          -
+            handle: project_type
+            field:
+              type: select
+              display: Project Type
+              options:
+                web_app: Web Application
+                mobile_app: Mobile Application
+                api: API/Backend
+                game: Game
+                tool: Development Tool
+                website: Website
+                other: Other
+          -
+            handle: status
+            field:
+              type: select
+              display: Status
+              options:
+                active: Active
+                completed: Completed
+                archived: Archived
+                in_development: In Development
+              default: completed
+          -
+            handle: is_featured
+            field:
+              type: toggle
+              display: Featured Project
+              default: false
+          -
+            handle: technologies
+            field:
+              type: terms
+              display: Technologies Used
+              instructions: Technologies, frameworks, and tools used
+              taxonomies:
+                - technologies
+              create: true
+          -
+            handle: live_url
+            field:
+              type: text
+              display: Live URL
+              instructions: Link to live project
+          -
+            handle: github_url
+            field:
+              type: text
+              display: GitHub URL
+              instructions: Link to source code (if public)
+          -
+            handle: featured_image
+            field:
+              type: assets
+              display: Featured Image
+              max_files: 1
+              container: assets
+          -
+            handle: order
+            field:
+              type: integer
+              display: Display Order
+              instructions: Lower numbers appear first
+          -
+            handle: content
+            field:
+              type: markdown
+              display: Content
+              required: true
