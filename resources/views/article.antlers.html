@@ -1,135 +1,372 @@
 {{ layout = 'layout' }}
 
-<article class="max-w-4xl mx-auto">
-    <!-- Article Header -->
-    <header class="text-center mb-12">
-        <!-- Meta Info -->
-        <div class="flex flex-wrap justify-center items-center gap-4 mb-6 text-sm text-gray-600">
-            <time>{{ date format="F j, Y" }}</time>
-            {{ if reading_time }}
-                <span>{{ reading_time }} min read</span>
-            {{ /if }}
-            <div class="flex gap-2">
-                {{ categories limit="2" }}
-                    <span class="px-2 py-1 bg-gray-100 rounded text-xs">{{ title }}</span>
-                {{ /categories }}
+<div class="relative overflow-hidden">
+    <!-- Hero Section with Radical Design -->
+    <section class="relative min-h-[70vh] project-hero-bg text-white overflow-hidden">
+        <!-- Animated Background Elements -->
+        <div class="absolute inset-0">
+            <div class="bg-element absolute top-10 left-10 w-32 h-32 bg-accent rotate-45 opacity-20"></div>
+            <div class="bg-element absolute top-1/2 right-20 w-24 h-24 border-4 border-accent rotate-12 opacity-30"></div>
+            <div class="bg-element absolute bottom-20 left-1/3 w-16 h-16 bg-white rotate-45 opacity-10"></div>
+            <div class="bg-element absolute top-1/4 left-1/2 w-2 h-40 bg-accent transform -rotate-12 opacity-40"></div>
+        </div>
+        
+        <!-- Main Hero Content -->
+        <div class="relative z-10 max-w-7xl mx-auto px-6 py-20">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Left: Article Info -->
+                <div class="space-y-8">
+                    <!-- Meta & Category Badges -->
+                    <div class="flex flex-wrap gap-4">
+                        <span class="px-4 py-2 bg-accent text-white font-bold uppercase tracking-wider text-sm border-2 border-accent">
+                            {{ date format="M j, Y" }}
+                        </span>
+                        {{ if reading_time }}
+                            <span class="px-4 py-2 border-2 border-white text-white font-bold uppercase tracking-wider text-sm hover:bg-white hover:text-black transition-all">
+                                {{ reading_time }} MIN READ
+                            </span>
+                        {{ /if }}
+                        {{ categories limit="1" }}
+                            <span class="px-4 py-2 border-2 border-white text-white font-bold uppercase tracking-wider text-sm hover:bg-white hover:text-black transition-all">
+                                {{ title }}
+                            </span>
+                        {{ /categories }}
+                    </div>
+                    
+                    <!-- Title with Radical Typography -->
+                    <div class="space-y-4 reveal-on-scroll">
+                        <h1 class="text-4xl lg:text-6xl font-black uppercase tracking-tight leading-none glitch-effect">
+                            <span class="block text-white">{{ title }}</span>
+                        </h1>
+                        {{ if excerpt }}
+                            <p class="text-xl lg:text-2xl project-subtitle font-light leading-relaxed">
+                                {{ excerpt }}
+                            </p>
+                        {{ /if }}
+                    </div>
+                    
+                    <!-- Author Info -->
+                    <div class="flex items-center gap-4 reveal-on-scroll">
+                        {{ if global:profile:profile_image }}
+                            <img src="{{ global:profile:profile_image }}" alt="{{ global:profile:full_name }}" class="w-16 h-16 rounded-full border-2 border-white">
+                        {{ else }}
+                            <div class="w-16 h-16 bg-accent rounded-full border-2 border-white flex items-center justify-center text-white text-lg font-bold">
+                                {{ global:profile:full_name | initials }}
+                            </div>
+                        {{ /if }}
+                        <div>
+                            <div class="text-white font-bold text-lg">{{ global:profile:full_name }}</div>
+                            <div class="text-gray-300 text-sm uppercase tracking-wider">{{ global:profile:current_role }}</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right: Featured Image with Radical Frame -->
+                <div class="lg:order-2 reveal-on-scroll">
+                    {{ if featured_image }}
+                        <div class="relative group image-overlay">
+                            <!-- Geometric Frame -->
+                            <div class="absolute -inset-4 bg-accent opacity-20 transform rotate-1 group-hover:rotate-2 transition-transform duration-500"></div>
+                            <div class="absolute -inset-2 border-2 border-white transform -rotate-1 group-hover:-rotate-2 transition-transform duration-500"></div>
+                            
+                            <!-- Image -->
+                            <div class="relative overflow-hidden">
+                                <img src="{{ featured_image }}" alt="{{ title }}" class="w-full h-80 lg:h-96 object-cover">
+                                <div class="absolute inset-0 bg-gradient-to-tr from-black/30 to-transparent"></div>
+                            </div>
+                        </div>
+                    {{ else }}
+                        <!-- Fallback Graphic Element -->
+                        <div class="relative h-80 lg:h-96 bg-gray-800 border-2 border-accent flex items-center justify-center neon-glow">
+                            <div class="text-6xl font-black text-accent opacity-50 glitch-effect">{{ title | truncate:1:'' | upper }}</div>
+                        </div>
+                    {{ /if }}
+                </div>
             </div>
         </div>
         
-        <!-- Title -->
-        <h1 class="geometric-accent mb-6">{{ title }}</h1>
-        
-        <!-- Excerpt -->
-        {{ if excerpt }}
-            <p class="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">{{ excerpt }}</p>
-        {{ /if }}
-        
-        <!-- Featured Image -->
-        {{ if featured_image }}
-            <div class="mt-8">
-                <img src="{{ featured_image }}" alt="{{ title }}" class="w-full h-64 md:h-96 object-cover rounded-lg shadow-lg">
-            </div>
-        {{ /if }}
-    </header>
+        <!-- Bottom Geometric Separator -->
+        <div class="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-r from-accent to-transparent transform skew-y-1 origin-bottom-left"></div>
+    </section>
 
-    <!-- Article Content -->
-    <div class="prose prose-lg max-w-none mb-12">
-        {{ content | markdown }}
-    </div>
-
-    <!-- Tags -->
+    <!-- Tags Section with Radical Grid -->
     {{ if tags }}
-        <section class="mb-12">
-            <h3 class="text-lg font-bold mb-4">Tags</h3>
-            <div class="flex flex-wrap gap-2">
+    <section class="py-16 bg-white relative">
+        <div class="absolute top-0 left-0 w-full h-1 bg-accent"></div>
+        
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="mb-12">
+                <h2 class="text-4xl font-black uppercase tracking-tight mb-4 geometric-accent">Tags</h2>
+                <div class="w-20 h-1 bg-black"></div>
+            </div>
+            
+            <!-- Tags with Radical Cards -->
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
                 {{ tags }}
-                    <a href="/blog/tags/{{ slug }}" class="px-3 py-1 bg-gray-100 hover:bg-accent hover:text-white text-sm rounded-full transition-colors">
-                        {{ title }}
-                    </a>
+                    <div class="tech-card group relative reveal-on-scroll">
+                        <!-- Background geometric shapes -->
+                        <div class="absolute inset-0 bg-black transform rotate-2 group-hover:rotate-3 transition-transform duration-300"></div>
+                        <div class="absolute inset-0 bg-accent transform -rotate-1 group-hover:-rotate-2 transition-transform duration-300"></div>
+                        
+                        <!-- Tag card -->
+                        <div class="relative bg-white border-2 border-black p-4 text-center">
+                            <a href="/blog/tags/{{ slug }}" class="font-bold text-sm uppercase tracking-wider text-black hover:text-accent transition-colors">{{ title }}</a>
+                        </div>
+                    </div>
                 {{ /tags }}
             </div>
-        </section>
+        </div>
+    </section>
     {{ /if }}
 
-    <!-- Author Info -->
-    <section class="card-sharp mb-12">
-        <div class="flex flex-col md:flex-row items-start gap-6">
-            <div class="flex-shrink-0">
-                {{ if global:profile:profile_image }}
-                    <img src="{{ global:profile:profile_image }}" alt="{{ global:profile:full_name }}" class="w-20 h-20 rounded-full">
-                {{ else }}
-                    <div class="w-20 h-20 bg-accent rounded-full flex items-center justify-center text-white text-2xl font-bold">
-                        {{ global:profile:full_name | initials }}
-                    </div>
-                {{ /if }}
-            </div>
-            <div class="flex-1">
-                <h3 class="text-xl font-bold mb-2">{{ global:profile:full_name }}</h3>
-                <p class="text-gray-600 mb-4">{{ global:profile:bio }}</p>
-                <div class="flex gap-4">
-                    <a href="/about" class="text-accent hover:underline">About Me</a>
-                    <a href="{{ global:profile:linkedin }}" target="_blank" class="text-accent hover:underline">LinkedIn</a>
-                    <a href="/contact" class="text-accent hover:underline">Contact</a>
+    <!-- Main Content with Radical Typography -->
+    <section class="py-20 bg-gray-50 relative overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute top-0 right-0 w-64 h-64 bg-accent opacity-5 transform rotate-45"></div>
+        <div class="absolute bottom-0 left-0 w-32 h-32 border-4 border-black opacity-10 transform -rotate-12"></div>
+        
+        <div class="max-w-4xl mx-auto px-6 relative z-10">
+            <!-- Content with Radical Styling -->
+            <div class="prose prose-lg max-w-none">
+                <div class="space-y-12 reveal-on-scroll">
+                    {{ content | markdown }}
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Related Posts -->
-    <section class="mb-12">
-        <h3 class="text-2xl font-bold mb-8 geometric-accent">Related Articles</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {{ relate:tags as="related" limit="4" }}
-                {{ related }}
-                    {{ unless id == entry.id }}
-                        <article class="border-l-4 border-gray-200 pl-6 hover:border-accent transition-colors">
-                            <time class="text-sm text-gray-500">{{ date format="F j, Y" }}</time>
-                            <h4 class="text-lg font-bold mt-2 mb-2">
-                                <a href="{{ url }}" class="hover:text-accent transition-colors">{{ title }}</a>
-                            </h4>
-                            <p class="text-gray-600 text-sm">{{ excerpt | truncate:100 }}</p>
-                        </article>
-                    {{ /unless }}
-                {{ /related }}
-            {{ /relate:tags }}
+    <!-- Author Section with Radical Design -->
+    <section class="py-16 bg-black text-white relative overflow-hidden" style="color: white !important;">
+        <!-- Animated Background -->
+        <div class="absolute inset-0">
+            <div class="absolute top-1/4 left-10 w-2 h-20 bg-accent animate-pulse"></div>
+            <div class="absolute bottom-1/4 right-20 w-16 h-16 border-2 border-accent rotate-45 opacity-50"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-black uppercase tracking-tight mb-4 text-white" style="color: white !important;">About the Author</h2>
+                <div class="w-20 h-1 bg-accent mx-auto"></div>
+            </div>
+            
+            <div class="flex flex-col md:flex-row items-center gap-8 max-w-4xl mx-auto">
+                <div class="flex-shrink-0 group">
+                    <div class="relative">
+                        <div class="absolute -inset-4 bg-accent opacity-20 transform rotate-3 group-hover:rotate-6 transition-transform"></div>
+                        {{ if global:profile:profile_image }}
+                            <img src="{{ global:profile:profile_image }}" alt="{{ global:profile:full_name }}" class="relative w-32 h-32 rounded-full border-4 border-accent">
+                        {{ else }}
+                            <div class="relative w-32 h-32 bg-accent rounded-full border-4 border-white flex items-center justify-center text-white text-4xl font-bold">
+                                {{ global:profile:full_name | initials }}
+                            </div>
+                        {{ /if }}
+                    </div>
+                </div>
+                <div class="flex-1 text-center md:text-left">
+                    <h3 class="text-3xl font-black mb-4" style="color: white !important;">{{ global:profile:full_name }}</h3>
+                    <p class="text-xl mb-6 leading-relaxed" style="color: #d1d5db !important;">{{ global:profile:bio }}</p>
+                    <div class="flex flex-wrap gap-4 justify-center md:justify-start">
+                        <a href="/about" class="px-6 py-3 bg-accent text-white font-bold uppercase tracking-wider border-2 border-accent hover:bg-transparent hover:text-white transition-all">
+                            About Me
+                        </a>
+                        <a href="{{ global:profile:linkedin }}" target="_blank" class="px-6 py-3 bg-accent text-white font-bold uppercase tracking-wider border-2 border-accent hover:bg-transparent hover:text-white transition-all">
+                            LinkedIn
+                        </a>
+                        <a href="/contact" class="px-6 py-3 bg-accent text-white font-bold uppercase tracking-wider border-2 border-accent hover:bg-transparent hover:text-white transition-all">
+                            Contact
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Navigation -->
-    <nav class="flex justify-between items-center mb-12">
-        {{ collection:blog as="posts" }}
-            {{ posts sort="date:asc" }}
-                {{ if id == entry.id }}
-                    {{ prev }}
-                        <div class="text-left">
-                            <p class="text-sm text-gray-500 mb-1">Previous Article</p>
-                            <a href="{{ url }}" class="text-accent hover:underline font-medium">
-                                {{ title | truncate:50 }}
-                            </a>
-                        </div>
-                    {{ /prev }}
-                    {{ next }}
-                        <div class="text-right">
-                            <p class="text-sm text-gray-500 mb-1">Next Article</p>
-                            <a href="{{ url }}" class="text-accent hover:underline font-medium">
-                                {{ title | truncate:50 }}
-                            </a>
-                        </div>
-                    {{ /next }}
-                {{ /if }}
-            {{ /posts }}
-        {{ /collection:blog }}
-    </nav>
+    <!-- Related Posts with Radical Design -->
+    <section class="py-20 bg-white relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-accent opacity-5 transform rotate-45"></div>
+        <div class="absolute bottom-0 left-0 w-32 h-32 border-4 border-black opacity-10 transform -rotate-12"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="mb-12">
+                <h2 class="text-4xl font-black uppercase tracking-tight mb-4 geometric-accent">Related Articles</h2>
+                <div class="w-20 h-1 bg-black"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {{ relate:tags as="related" limit="4" }}
+                    {{ related }}
+                        {{ unless id == entry.id }}
+                            <article class="card-sharp hover:transform hover:-translate-y-1 hover:translate-x-1 transition-all duration-300 group relative overflow-hidden">
+                                <!-- Radical accent corner -->
+                                <div class="absolute -top-2 -right-2 w-8 h-8 bg-accent rotate-45 group-hover:rotate-90 transition-transform duration-300"></div>
+                                
+                                <div class="p-6">
+                                    <time class="text-xs font-black text-black uppercase tracking-widest border border-black px-2 py-1 inline-block transform -rotate-1 group-hover:rotate-0 transition-transform">{{ date format="M j, Y" }}</time>
+                                    
+                                    <h4 class="text-xl font-black mt-4 mb-3 leading-tight text-black">
+                                        <a href="{{ url }}" class="hover:text-accent transition-colors group-hover:text-accent">{{ title }}</a>
+                                    </h4>
+                                    
+                                    <p class="text-black mb-4 leading-relaxed font-medium text-sm">{{ excerpt | truncate:100 }}</p>
+                                    
+                                    <div class="flex justify-between items-center pt-3 border-t-2 border-black">
+                                        <a href="{{ url }}" class="text-accent text-xs font-black uppercase tracking-wide hover:text-black transition-colors">READ →</a>
+                                    </div>
+                                </div>
+                            </article>
+                        {{ /unless }}
+                    {{ /related }}
+                {{ /relate:tags }}
+            </div>
+        </div>
+    </section>
+
+    <!-- Navigation with Radical Design -->
+    <section class="py-16 bg-gray-50 relative">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="flex justify-between items-center">
+                {{ collection:blog as="posts" }}
+                    {{ posts sort="date:asc" }}
+                        {{ if id == entry.id }}
+                            {{ prev }}
+                                <div class="text-left group">
+                                    <div class="relative">
+                                        <div class="absolute -inset-2 bg-black transform -rotate-1 group-hover:-rotate-2 transition-transform"></div>
+                                        <div class="relative bg-white border-2 border-black p-4">
+                                            <p class="text-xs font-black text-black uppercase tracking-wider mb-2">← Previous</p>
+                                            <a href="{{ url }}" class="text-lg font-bold text-black hover:text-accent transition-colors">
+                                                {{ title | truncate:30 }}
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            {{ /prev }}
+                            {{ next }}
+                                <div class="text-right group">
+                                    <div class="relative">
+                                        <div class="absolute -inset-2 bg-accent transform rotate-1 group-hover:rotate-2 transition-transform"></div>
+                                        <div class="relative bg-white border-2 border-black p-4">
+                                            <p class="text-xs font-black text-black uppercase tracking-wider mb-2">Next →</p>
+                                            <a href="{{ url }}" class="text-lg font-bold text-black hover:text-accent transition-colors">
+                                                {{ title | truncate:30 }}
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            {{ /next }}
+                        {{ /if }}
+                    {{ /posts }}
+                {{ /collection:blog }}
+            </div>
+        </div>
+    </section>
 
     <!-- Call to Action -->
-    <section class="text-center bg-gray-50 -mx-4 md:-mx-8 px-4 md:px-8 py-16">
-        <h3 class="text-2xl font-bold mb-4">Enjoyed this article?</h3>
-        <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
-            If you found this helpful, you might enjoy my other articles on software engineering and system architecture.
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="/blog" class="button-sharp">Read More Articles</a>
-            <a href="/contact" class="button-accent">Get In Touch</a>
+    <section class="py-20 bg-white relative">
+        <div class="absolute inset-0 bg-gradient-to-br from-gray-50 to-white"></div>
+        
+        <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+            <h2 class="text-4xl lg:text-5xl font-black uppercase tracking-tight mb-8 geometric-accent">
+                Ready to Build Something?
+            </h2>
+            
+            <p class="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
+                This article showcases my knowledge and experience. Let's discuss your next project or connect on similar topics.
+            </p>
+            
+            <div class="flex flex-wrap gap-6 justify-center">
+                <a href="/blog" class="group relative px-8 py-4 bg-accent text-white font-bold uppercase tracking-wider border-2 border-accent overflow-hidden">
+                    <span class="relative z-10">Read More Articles</span>
+                    <div class="absolute inset-0 bg-black transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
+                </a>
+                
+                <a href="/contact" class="px-8 py-4 border-2 border-black text-black font-bold uppercase tracking-wider hover:bg-black hover:text-white transition-all duration-300">
+                    Get In Touch
+                </a>
+            </div>
         </div>
     </section>
-</article>
+</div>
+
+<script>
+// Radical Article Page Interactions
+document.addEventListener('DOMContentLoaded', function() {
+    // Scroll reveal animation
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+            }
+        });
+    }, observerOptions);
+    
+    // Observe all reveal elements
+    document.querySelectorAll('.reveal-on-scroll').forEach(el => {
+        observer.observe(el);
+    });
+    
+    // Magnetic button effect
+    document.querySelectorAll('.magnetic-button').forEach(button => {
+        button.addEventListener('mousemove', function(e) {
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            
+            const moveX = x * 0.15;
+            const moveY = y * 0.15;
+            
+            this.style.setProperty('--mouse-x', moveX + 'px');
+            this.style.setProperty('--mouse-y', moveY + 'px');
+        });
+        
+        button.addEventListener('mouseleave', function() {
+            this.style.setProperty('--mouse-x', '0px');
+            this.style.setProperty('--mouse-y', '0px');
+        });
+    });
+    
+    // Parallax effect on scroll
+    window.addEventListener('scroll', function() {
+        const scrolled = window.pageYOffset;
+        const parallaxElements = document.querySelectorAll('.parallax-element');
+        
+        parallaxElements.forEach(element => {
+            const speed = element.dataset.speed || 0.5;
+            const yPos = -(scrolled * speed);
+            element.style.transform = `translateY(${yPos}px)`;
+        });
+        
+        // Floating background elements parallax
+        const bgElements = document.querySelectorAll('.bg-element');
+        bgElements.forEach((element, index) => {
+            const speed = 0.2 + (index * 0.1);
+            const yPos = scrolled * speed;
+            element.style.transform = `translateY(${yPos}px) rotate(${scrolled * 0.02}deg)`;
+        });
+    });
+    
+    // Add stagger animation to tech cards
+    const techCards = document.querySelectorAll('.tech-card');
+    techCards.forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.1}s`;
+    });
+    
+    // Enhanced button hover effects
+    document.querySelectorAll('.radical-button').forEach(button => {
+        button.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-3px) scale(1.05)';
+            this.style.boxShadow = '0 15px 30px rgba(0,0,0,0.4)';
+        });
+        
+        button.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+            this.style.boxShadow = 'none';
+        });
+    });
+});
+</script>

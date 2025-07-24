@@ -24,7 +24,7 @@ return [
     |
     */
 
-    'cache_store' => null,
+    'cache_store' => env('STATAMIC_STACHE_CACHE_STORE', 'redis'),
 
     /*
     |--------------------------------------------------------------------------

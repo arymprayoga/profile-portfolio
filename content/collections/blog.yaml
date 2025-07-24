@@ -6,6 +6,7 @@ past_date_behavior: public
 future_date_behavior: private
 sort_dir: desc
 blueprint: article
+template: article
 route: /blog/{slug}
 taxonomies:
   - tags

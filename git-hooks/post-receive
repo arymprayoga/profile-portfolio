@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Git Post-Receive Hook for Automated Deployment
+# Place this file in .git/hooks/post-receive and make it executable
+
+echo "🔄 Post-receive hook triggered..."
+
+# Get the repository directory
+REPO_DIR=$(git rev-parse --show-toplevel)
+
+# Check if deployment script exists
+if [ -f "${REPO_DIR}/deployment.sh" ]; then
+    echo "🚀 Running automated deployment..."
+    cd "${REPO_DIR}"
+    ./deployment.sh
+    
+    if [ $? -eq 0 ]; then
+        echo "✅ Deployment completed successfully!"
+    else
+        echo "❌ Deployment failed!"
+        exit 1
+    fi
+else
+    echo "⚠️  Deployment script not found at ${REPO_DIR}/deployment.sh"
+    echo "📝 Manual deployment may be required"
+fi
