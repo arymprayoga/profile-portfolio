@@ -132,3 +132,20 @@ resources/blueprints/collections/
 - ALWAYS run `php artisan statamic:stache:clear` after blueprint changes
 - Blueprint changes won't appear in Control Panel until cache is cleared
 - Use `php artisan statamic:stache:refresh` for complete rebuild if issues persist
+
+## Antlers Template Syntax
+
+### Global Data Access
+- **Correct syntax**: `{{ profile:field_name }}` for global profile data
+- **Incorrect syntax**: `{{ global:profile:field_name }}` (this doesn't work in Statamic 5)
+- **Example**: `{{ profile:full_name }}`, `{{ profile:email }}`, `{{ profile:career_summary }}`
+
+### Asset Field Handling
+- **Asset fields automatically provide full URLs** - no need to construct paths manually
+- **Correct**: `<a href="{{ profile:resume }}">` (asset field provides full URL)
+- **Incorrect**: `<a href="/assets/{{ profile:resume }}">` (manual path construction)
+- Asset fields store filenames in YAML but templates receive full URLs
+
+### Field Type Notes
+- **Use `type: list` instead of `type: tags`** - the `tags` fieldtype doesn't exist in Statamic 5
+- Lists are rendered in templates with: `{{ field_name }}{{ value }}{{ /field_name }}`

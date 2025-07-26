@@ -75,15 +75,24 @@ tabs:
           -
             handle: skills
             field:
-              type: tags
+              type: list
               display: Core Skills
               instructions: Main technical skills and expertise
           -
             handle: principles
             field:
-              type: tags
+              type: list
               display: Work Principles
               instructions: Your professional principles and methodologies
+          -
+            handle: resume
+            field:
+              type: assets
+              display: Resume PDF
+              instructions: Upload your latest resume in PDF format
+              max_files: 1
+              container: assets
+              restrict: pdf
   education:
     display: Education
     sections:

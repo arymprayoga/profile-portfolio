@@ -72,7 +72,7 @@ tabs:
           -
             handle: technologies
             field:
-              type: tags
+              type: list
               display: Technologies Used
               instructions: Technologies, frameworks, and tools used
           -

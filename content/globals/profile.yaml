@@ -1,29 +1,27 @@
 title: Profile
 data:
-  full_name: Ary Muhammad Prayoga
-  job_title: Software Engineer
-  location: Cibubur, Jakarta Timur
-  phone: +6281311370288
+  full_name: 'Ary Muhammad Prayoga'
+  job_title: 'Software Engineer'
+  location: 'Cibubur, Jakarta Timur'
+  phone: 6281311370288
   email: arymp111@gmail.com
-  linkedin: https://linkedin.com/in/arymprayoga
-  github: ''
-  website: ''
+  linkedin: 'https://linkedin.com/in/arymprayoga'
   career_summary: '5 years shipping back-end heavy, data-intensive products that run fast and scale smoothly. Track record of cutting latency, slashing infra cost, and rolling out features that pull in new users.'
+  bio: 'Passionate software engineer with expertise in backend development, system architecture, and performance optimization. Love building scalable systems that make a real impact.'
   skills:
-    - Ruby on Rails
-    - Go (Echo, Fiber)
-    - PHP (Laravel 8)
+    - 'Ruby on Rails'
+    - 'Go (Echo, Fiber)'
+    - 'PHP (Laravel 8)'
     - PostgreSQL
     - Redis
     - Docker
     - AWS
   principles:
     - TDD
-    - Clean Architecture
-    - Metrics-driven iteration
-  education:
-    degree: Bachelor of Computer Science - Software Engineering
-    university: Brawijaya University
-    gpa: '3.36'
-    years: '2015 - 2020'
-  bio: 'Passionate software engineer with expertise in backend development, system architecture, and performance optimization. Love building scalable systems that make a real impact.'
+    - 'Clean Architecture'
+    - 'Metrics-driven iteration'
+  resume: ary-m-prayoga-(ats).pdf
+  degree: 'Bachelor of Computer Science - Software Engineering'
+  university: 'Brawijaya University'
+  years: '2015 - 2020'
+  gpa: '3.36'
