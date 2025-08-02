@@ -15,7 +15,6 @@ I'm always interested in discussing new opportunities, collaborating on interest
 Whether you're looking for a talented software engineer, want to collaborate on a project, or just want to chat about technology, I'd love to hear from you.
 
 **Email**: [arymp111@gmail.com](mailto:arymp111@gmail.com)  
-**Phone**: +6281311370288  
 **LinkedIn**: [linkedin.com/in/arymprayoga](https://linkedin.com/in/arymprayoga)  
 **Location**: Cibubur, Jakarta Timur, Indonesia
 

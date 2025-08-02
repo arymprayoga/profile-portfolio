@@ -15,18 +15,13 @@ tabs:
             handle: job_title
             field:
               type: text
-              required: true  
+              required: true
               display: Job Title
           -
             handle: location
             field:
               type: text
               display: Location
-          -
-            handle: phone
-            field:
-              type: text
-              display: Phone Number
           -
             handle: email
             field:

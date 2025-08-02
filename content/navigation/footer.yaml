@@ -3,6 +3,9 @@ tree:
     title: Professional
     children:
       -
+        title: About
+        url: /about
+      -
         title: Resume
         url: /resume
       -

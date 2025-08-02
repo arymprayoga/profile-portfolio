@@ -3,7 +3,7 @@ title: Home
 id: home
 template: home
 blueprint: pages
-hero_title: "Hi, I'm Ary Muhammad Prayoga"
+hero_title: "Hi, I'm Ary M Prayoga"
 hero_subtitle: "Software Engineer crafting scalable backend systems"
 show_recent_work: true
 show_recent_posts: true
