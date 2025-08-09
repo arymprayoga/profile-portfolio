@@ -1,186 +1,125 @@
 {{ layout = 'layout' }}
 
-<div class="relative overflow-hidden">
-    <!-- Hero Section with Radical Design -->
-    <section class="relative min-h-[60vh] project-hero-bg text-white overflow-hidden">
-        <!-- Animated Background Elements -->
-        <div class="absolute inset-0">
-            <div class="bg-element absolute top-10 left-10 w-32 h-32 bg-accent rotate-45 opacity-20"></div>
-            <div class="bg-element absolute top-1/2 right-20 w-24 h-24 border-4 border-accent rotate-12 opacity-30"></div>
-            <div class="bg-element absolute bottom-20 left-1/3 w-16 h-16 bg-white rotate-45 opacity-10"></div>
-            <div class="bg-element absolute top-1/4 left-1/2 w-2 h-40 bg-accent transform -rotate-12 opacity-40"></div>
-        </div>
-        
-        <!-- Main Hero Content -->
-        <div class="relative z-10 max-w-7xl mx-auto px-6 py-20">
-            <div class="text-center space-y-8">
-                <!-- Status Badge -->
-                <div class="flex justify-center">
-                    <span class="px-6 py-3 bg-accent text-white font-bold uppercase tracking-wider text-lg border-2 border-accent">
-                        Technical Blog
-                    </span>
+<!-- Radical Background Elements (Following Projects Page Pattern) -->
+<div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+    <div class="absolute top-20 left-10 w-16 h-16 bg-accent opacity-20 transform rotate-45 bg-element"></div>
+    <div class="absolute top-40 right-20 w-12 h-12 border-2 border-accent opacity-30 bg-element"></div>
+    <div class="absolute bottom-40 left-1/4 w-8 h-8 bg-black opacity-40 transform rotate-12 bg-element"></div>
+    <div class="absolute top-1/3 right-1/3 w-6 h-20 bg-accent opacity-15 transform -rotate-45 bg-element"></div>
+    <div class="absolute bottom-20 right-10 w-14 h-14 border-2 border-black opacity-25 transform rotate-45 bg-element"></div>
+</div>
+
+<div class="relative z-10 max-w-6xl mx-auto">
+    <!-- Terminal Header -->
+    <header class="text-center mb-16 reveal-on-scroll">
+        <div class="terminal-window bg-black border-4 border-accent shadow-sharp mb-8 transform -rotate-1">
+            <div class="terminal-title-bar bg-gray-800 p-3 flex items-center justify-between">
+                <div class="flex space-x-2">
+                    <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                    <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                    <div class="w-3 h-3 bg-green-500 rounded-full"></div>
                 </div>
-                
-                <!-- Title with Radical Typography -->
-                <div class="space-y-6 reveal-on-scroll">
-                    <h1 class="text-5xl lg:text-7xl font-black uppercase tracking-tight leading-none glitch-effect">
-                        <span class="block text-white">{{ title }}</span>
-                    </h1>
-                    <div class="max-w-4xl mx-auto">
-                        <div class="prose prose-xl text-gray-300 font-light leading-relaxed">
-                            {{ content }}
-                        </div>
-                    </div>
+                <span class="text-white font-mono text-sm">~/blog $</span>
+            </div>
+            <div class="p-6 font-mono">
+                <div class="text-green-400 mb-2">
+                    <span class="text-accent">arym@portfolio</span>:<span class="text-blue-400">~</span>$ cat blog.md
                 </div>
-                
-                <!-- Stats -->
-                <div class="flex flex-wrap justify-center gap-8 reveal-on-scroll">
-                    <div class="text-center">
-                        <div class="text-3xl font-black text-accent">{{ collection:blog | count }}</div>
-                        <div class="text-white font-bold uppercase tracking-wider text-sm">Articles</div>
-                    </div>
-                    <div class="text-center">
-                        <div class="text-3xl font-black text-accent">{{ taxonomy:categories | count }}</div>
-                        <div class="text-white font-bold uppercase tracking-wider text-sm">Categories</div>
-                    </div>
-                    <div class="text-center">
-                        <div class="text-3xl font-black text-accent">{{ taxonomy:tags | count }}</div>
-                        <div class="text-white font-bold uppercase tracking-wider text-sm">Tags</div>
-                    </div>
+                <h1 class="text-4xl md:text-6xl font-black text-green-400 mb-2 glitch-effect">{{ title | upper }}</h1>
+                <div class="text-gray-400">{{ content | strip_tags | truncate:80 }}</div>
+                <div class="text-cyan-400 mt-4 flex gap-8">
+                    <span>{{ collection:blog | count }} ARTICLES</span>
                 </div>
             </div>
         </div>
-        
-        <!-- Bottom Geometric Separator -->
-        <div class="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-r from-accent to-transparent transform skew-y-1 origin-bottom-left"></div>
-    </section>
+    </header>
 
     <!-- Featured Articles Section -->
-    <section class="py-16 bg-white relative">
-        <div class="absolute top-0 left-0 w-full h-1 bg-accent"></div>
+    <section class="mb-20">
+        <div class="text-center mb-12">
+            <h2 class="text-5xl md:text-7xl font-black geometric-accent glitch-effect transform -rotate-1">FEATURED</h2>
+            <div class="w-32 h-2 bg-accent mx-auto transform rotate-1 shadow-sharp mt-4"></div>
+        </div>
         
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="mb-12">
-                <h2 class="text-4xl font-black uppercase tracking-tight mb-4 geometric-accent">Featured Articles</h2>
-                <div class="w-20 h-1 bg-black"></div>
-            </div>
-            
-            <!-- Featured Posts with Radical Cards -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                {{ collection:blog sort="date:desc" is_featured:is="true" limit="2" }}
-                    <article class="card-sharp hover:transform hover:-translate-y-1 hover:translate-x-1 transition-all duration-300 group relative overflow-hidden reveal-on-scroll">
-                        <!-- Radical accent corner -->
-                        <div class="absolute -top-2 -right-2 w-8 h-8 bg-accent rotate-45 group-hover:rotate-90 transition-transform duration-300"></div>
-                        
-                        {{ if featured_image }}
-                            <div class="relative group image-overlay mb-6">
-                                <!-- Geometric Frame -->
-                                <div class="absolute -inset-2 bg-accent opacity-20 transform rotate-1 group-hover:rotate-2 transition-transform duration-500"></div>
-                                <div class="absolute -inset-1 border-2 border-black transform -rotate-1 group-hover:-rotate-2 transition-transform duration-500"></div>
-                                
-                                <!-- Image -->
-                                <div class="relative overflow-hidden">
-                                    <img src="{{ featured_image }}" alt="{{ title }}" class="w-full h-48 object-cover">
-                                    <div class="absolute inset-0 bg-gradient-to-tr from-black/30 to-transparent"></div>
-                                </div>
-                            </div>
-                        {{ /if }}
-                        
-                        <div class="p-6">
-                            <div class="flex items-center justify-between mb-4">
-                                <time class="text-sm font-bold text-black uppercase tracking-wider border-b-2 border-accent pb-1">{{ date format="M j, Y" }}</time>
-                                <div class="bg-black text-white px-3 py-1 text-xs font-black uppercase tracking-wide transform -rotate-2">
-                                    FEATURED
-                                </div>
-                            </div>
-                            
-                            <h3 class="text-2xl font-black mb-4 leading-tight text-black">
-                                <a href="{{ url }}" class="hover:text-accent transition-colors group-hover:text-accent">{{ title }}</a>
-                            </h3>
-                            
-                            <p class="text-black mb-6 leading-relaxed font-medium">{{ excerpt }}</p>
-                            
-                            <div class="flex flex-wrap gap-2 mb-6">
-                                {{ categories limit="3" }}
-                                    <div class="tech-card group relative">
-                                        <!-- Background geometric shapes -->
-                                        <div class="absolute inset-0 bg-black transform rotate-2 group-hover:rotate-3 transition-transform duration-300"></div>
-                                        <div class="absolute inset-0 bg-accent transform -rotate-1 group-hover:-rotate-2 transition-transform duration-300"></div>
-                                        
-                                        <!-- Category card -->
-                                        <div class="relative bg-white border-2 border-black px-3 py-1 text-center">
-                                            <span class="font-bold text-xs uppercase tracking-wider text-black">{{ title }}</span>
-                                        </div>
-                                    </div>
-                                {{ /categories }}
-                            </div>
-                            
-                            <div class="flex justify-between items-center pt-4 border-t-2 border-black">
-                                <a href="{{ url }}" class="radical-button px-6 py-2 bg-accent text-white font-bold uppercase tracking-wider border-2 border-accent hover:bg-transparent hover:text-accent transition-all text-sm">READ ARTICLE</a>
-                                {{ if reading_time }}
-                                    <span class="text-sm text-black font-bold">{{ reading_time }} MIN</span>
-                                {{ /if }}
-                            </div>
-                        </div>
-                    </article>
-                {{ /collection:blog }}
-            </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {{ collection:blog sort="date:desc" is_featured:is="true" limit="2" }}
+            <article class="card-sharp bg-white border-4 border-black transform hover:rotate-0 transition-all duration-300 reveal-on-scroll{{ if index % 2 == 0 }} rotate-1{{ else }} -rotate-1{{ /if }}" x-data="{ hover: false }" @mouseenter="hover = true" @mouseleave="hover = false">
+                <div class="absolute -top-3 -right-3 px-4 py-2 bg-accent text-white font-black text-xs transform rotate-12 shadow-sharp">FEATURED</div>
+                {{ if featured_image }}
+                <div class="mb-6 overflow-hidden">
+                    <img src="{{ featured_image }}" alt="{{ title }}" class="w-full h-64 object-cover border-b-4 border-black">
+                </div>
+                {{ /if }}
+                <div class="p-6">
+                    <h3 class="text-2xl font-black mb-2 geometric-accent">{{ title | upper }}</h3>
+                    <p class="text-lg text-gray-600 mb-4">{{ excerpt | truncate:150 }}</p>
+                    <div class="flex justify-between items-center mb-6">
+                        <span class="px-3 py-1 bg-black text-white font-mono text-sm">{{ date format="M j, Y" | upper }}</span>
+                        {{ if reading_time }}<span class="text-gray-500 font-mono">{{ reading_time }} MIN READ</span>{{ /if }}
+                    </div>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        {{ categories limit="3" }}<span class="px-2 py-1 bg-gray-100 border-2 border-gray-300 text-xs font-mono">{{ title }}</span>{{ /categories }}
+                    </div>
+                    <div class="flex gap-4 flex-wrap">
+                        <a href="{{ url }}" class="button-accent">READ_ARTICLE</a>
+                        {{ categories limit="1" }}<a href="/blog/categories/{{ slug }}" class="bg-white text-accent border-2 border-accent px-4 py-2 font-bold hover:bg-accent hover:text-white transition-all">{{ title | upper }}</a>{{ /categories }}
+                    </div>
+                </div>
+                <div class="absolute -bottom-2 -left-2 w-6 h-6 bg-accent transform rotate-45"></div>
+            </article>
+            {{ /collection:blog }}
         </div>
     </section>
 
-    <!-- All Posts Section with Radical Design -->
-    <section class="py-20 bg-gray-50 relative overflow-hidden">
-        <!-- Background Elements -->
-        <div class="absolute top-0 right-0 w-64 h-64 bg-accent opacity-5 transform rotate-45"></div>
-        <div class="absolute bottom-0 left-0 w-32 h-32 border-4 border-black opacity-10 transform -rotate-12"></div>
+    <!-- All Articles: Terminal Style -->
+    <section class="relative mb-20">
+        <!-- Diagonal separator -->
+        <div class="absolute -top-10 left-0 right-0 h-20 bg-accent opacity-10 transform -skew-y-1"></div>
         
-        <div class="max-w-7xl mx-auto px-6 relative z-10">
-            <div class="mb-12">
-                <h2 class="text-4xl font-black uppercase tracking-tight mb-4 geometric-accent">All Posts</h2>
-                <div class="w-20 h-1 bg-black"></div>
+        <div class="relative z-10 transform rotate-0.5">
+            <div class="bg-black border-4 border-accent p-6 mb-8 shadow-sharp font-mono">
+                <div class="text-green-400 mb-2">
+                    <span class="text-accent">$</span> find ./blog -name "*.md" | head -n 20
+                </div>
+                <div class="text-gray-400">{{ collection:blog | count }} articles found</div>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {{ collection:blog sort="date:desc" limit="12" }}
-                    <article class="card-sharp hover:transform hover:-translate-y-1 hover:translate-x-1 transition-all duration-300 group relative overflow-hidden reveal-on-scroll">
-                        <!-- Radical accent corner -->
-                        <div class="absolute -top-2 -right-2 w-8 h-8 bg-accent rotate-45 group-hover:rotate-90 transition-transform duration-300"></div>
+                    <article class="bg-black border-2 border-gray-600 text-white font-mono text-sm hover:border-accent transition-colors cursor-pointer reveal-on-scroll"
+                             x-data="{ expanded: false }"
+                             @click="expanded = !expanded">
                         
-                        {{ if featured_image }}
-                            <div class="relative overflow-hidden mb-4">
-                                <img src="{{ featured_image }}" alt="{{ title }}" class="w-full h-32 object-cover group-hover:contrast-125 transition-all duration-300">
-                                <div class="absolute inset-0 bg-gradient-to-tr from-black/30 to-transparent"></div>
-                            </div>
-                        {{ /if }}
+                        <div class="bg-gray-800 p-3 border-b border-gray-600 flex items-center gap-3">
+                            <span class="text-lg">📝</span>
+                            <span class="text-green-400 flex-1">{{ title | slugify }}.md</span>
+                            <span class="text-gray-400 text-xs">{{ date format="M y" }}</span>
+                        </div>
                         
-                        <div class="p-6">
-                            <time class="text-xs font-black text-black uppercase tracking-widest border border-black px-2 py-1 inline-block transform -rotate-1 group-hover:rotate-0 transition-transform">{{ date format="M j, Y" }}</time>
+                        <div class="p-4" :class="{'h-24 overflow-hidden': !expanded, 'h-auto': expanded}">
+                            {{ if featured_image && expanded }}
+                                <img src="{{ featured_image }}" alt="{{ title }}" class="w-full h-32 object-cover mb-3 border border-gray-600">
+                            {{ /if }}
                             
-                            <h3 class="text-lg font-black mt-4 mb-3 leading-tight text-black">
-                                <a href="{{ url }}" class="hover:text-accent transition-colors group-hover:text-accent">{{ title }}</a>
-                            </h3>
+                            <h4 class="text-white font-bold text-base mb-2">{{ title }}</h4>
+                            <p class="text-gray-300 text-sm mb-3" x-show="expanded">{{ excerpt | truncate:100 }}</p>
                             
-                            <p class="text-black mb-4 leading-relaxed font-medium text-sm">{{ excerpt | truncate:100 }}</p>
-                            
-                            <div class="flex flex-wrap gap-1 mb-4">
+                            <div class="flex flex-wrap gap-1 mb-3" x-show="expanded">
+                                {{ categories limit="2" }}
+                                    <code class="bg-gray-700 text-blue-400 px-1 py-0.5 text-xs">{{ title }}</code>
+                                {{ /categories }}
                                 {{ tags limit="2" }}
-                                    <div class="tech-card group relative inline-block">
-                                        <!-- Background geometric shapes -->
-                                        <div class="absolute inset-0 bg-black transform rotate-1 group-hover:rotate-2 transition-transform duration-300"></div>
-                                        <div class="absolute inset-0 bg-accent transform -rotate-1 group-hover:-rotate-1 transition-transform duration-300"></div>
-                                        
-                                        <!-- Tag card -->
-                                        <div class="relative bg-white border border-black px-2 py-1">
-                                            <span class="font-bold text-xs uppercase tracking-wide text-black">{{ title }}</span>
-                                        </div>
-                                    </div>
+                                    <code class="bg-gray-700 text-yellow-400 px-1 py-0.5 text-xs">{{ title }}</code>
                                 {{ /tags }}
                             </div>
                             
-                            <div class="flex justify-between items-center pt-3 border-t-2 border-black">
-                                <a href="{{ url }}" class="text-accent text-xs font-black uppercase tracking-wide hover:text-black transition-colors">READ →</a>
+                            <div class="space-y-1" x-show="expanded">
+                                <a href="{{ url }}" class="block text-green-400 hover:text-accent text-xs">→ read_article</a>
+                                {{ categories limit="1" }}
+                                    <a href="/blog/categories/{{ slug }}" class="block text-green-400 hover:text-accent text-xs">→ category/{{ slug }}</a>
+                                {{ /categories }}
                                 {{ if reading_time }}
-                                    <span class="text-xs text-black font-bold">{{ reading_time }}M</span>
+                                    <span class="block text-gray-500 text-xs">→ estimated_time: {{ reading_time }}min</span>
                                 {{ /if }}
                             </div>
                         </div>
@@ -190,144 +129,150 @@
         </div>
     </section>
 
-    <!-- Categories & Tags Section -->
-    <section class="py-16 bg-black text-white relative overflow-hidden">
-        <!-- Animated Background -->
-        <div class="absolute inset-0">
-            <div class="absolute top-1/4 left-10 w-2 h-20 bg-accent animate-pulse"></div>
-            <div class="absolute bottom-1/4 right-20 w-16 h-16 border-2 border-accent rotate-45 opacity-50"></div>
-        </div>
+    <!-- Categories & Tags: Terminal Directory Style -->
+    <section class="relative mb-20">
+        <!-- Diagonal separator -->
+        <div class="absolute -top-10 left-0 right-0 h-20 bg-black opacity-10 transform skew-y-1"></div>
         
-        <div class="max-w-7xl mx-auto px-6 relative z-10">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl font-black uppercase tracking-tight mb-4">Explore by Topic</h2>
-                <div class="w-20 h-1 bg-accent mx-auto"></div>
+        <div class="relative z-10 transform -rotate-0.5">
+            <div class="bg-black border-4 border-accent p-6 mb-8 shadow-sharp font-mono">
+                <div class="text-green-400 mb-2">
+                    <span class="text-accent">$</span> ls -la /blog/taxonomies/
+                </div>
+                <div class="text-gray-400">total {{ taxonomy:categories | count + taxonomy:tags | count }} directories</div>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Categories -->
-                <div class="relative">
-                    <div class="absolute -top-4 -left-4 w-12 h-12 bg-accent rotate-45 opacity-20"></div>
-                    <h3 class="text-2xl font-black mb-6 text-white uppercase tracking-wide">Categories</h3>
-                    <div class="space-y-3">
+                <!-- Categories Directory -->
+                <div class="bg-black border-2 border-gray-600 text-white font-mono">
+                    <div class="bg-gray-800 p-3 border-b border-gray-600 flex items-center gap-3">
+                        <span class="text-lg">📁</span>
+                        <span class="text-cyan-400 font-bold">categories/</span>
+                        <span class="text-gray-400 text-xs ml-auto">{{ taxonomy:categories | count }} items</span>
+                    </div>
+                    <div class="p-4 space-y-2">
                         {{ taxonomy:categories }}
-                            <div class="group">
-                                <div class="relative">
-                                    <div class="absolute -inset-2 bg-accent transform -rotate-1 group-hover:-rotate-2 transition-transform"></div>
-                                    <div class="relative bg-white text-black p-4 border-2 border-accent flex justify-between items-center">
-                                        <a href="/blog/categories/{{ slug }}" class="font-bold text-black group-hover:text-accent transition-colors uppercase tracking-wide">{{ title }}</a>
-                                        <div class="bg-black text-white px-3 py-1 text-xs font-black group-hover:bg-accent group-hover:text-white transition-colors">
-                                            {{ entries | length }}
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="flex items-center justify-between hover:bg-gray-800 p-2 rounded transition-colors">
+                                <a href="/blog/categories/{{ slug }}" class="text-green-400 hover:text-accent flex items-center gap-2">
+                                    <span class="text-sm">📂</span>
+                                    <span>{{ title }}</span>
+                                </a>
+                                <span class="text-gray-500 text-xs">{{ entries | count }} files</span>
                             </div>
                         {{ /taxonomy:categories }}
                     </div>
                 </div>
 
-                <!-- Tags -->
-                <div class="relative">
-                    <div class="absolute -top-4 -right-4 w-8 h-8 border-4 border-accent rotate-12 opacity-30"></div>
-                    <h3 class="text-2xl font-black mb-6 text-white uppercase tracking-wide">Tags</h3>
-                    <div class="flex flex-wrap gap-3">
-                        {{ taxonomy:tags }}
-                            <div class="tech-card group relative">
-                                <!-- Background geometric shapes -->
-                                <div class="absolute inset-0 bg-accent transform rotate-2 group-hover:rotate-3 transition-transform duration-300"></div>
-                                <div class="absolute inset-0 bg-white transform -rotate-1 group-hover:-rotate-2 transition-transform duration-300"></div>
-                                
-                                <!-- Tag card -->
-                                <div class="relative bg-black border-2 border-white px-4 py-2 text-center">
-                                    <a href="/blog/tags/{{ slug }}" class="font-bold text-sm uppercase tracking-wider text-white hover:text-accent transition-colors">{{ title }}</a>
-                                </div>
-                            </div>
-                        {{ /taxonomy:tags }}
+                <!-- Tags Directory -->
+                <div class="bg-black border-2 border-gray-600 text-white font-mono">
+                    <div class="bg-gray-800 p-3 border-b border-gray-600 flex items-center gap-3">
+                        <span class="text-lg">🏷️</span>
+                        <span class="text-cyan-400 font-bold">tags/</span>
+                        <span class="text-gray-400 text-xs ml-auto">{{ taxonomy:tags | count }} items</span>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex flex-wrap gap-2">
+                            {{ taxonomy:tags }}
+                                <a href="/blog/tags/{{ slug }}" class="text-yellow-400 hover:text-accent bg-gray-800 border border-gray-600 px-2 py-1 text-xs rounded transition-colors">
+                                    {{ title }}
+                                </a>
+                            {{ /taxonomy:tags }}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Call to Action -->
-    <section class="py-20 bg-white relative">
-        <div class="absolute inset-0 bg-gradient-to-br from-gray-50 to-white"></div>
-        
-        <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
-            <h2 class="text-4xl lg:text-5xl font-black uppercase tracking-tight mb-8 geometric-accent">
-                Ready to Connect?
-            </h2>
+    <!-- Terminal Command Line CTA -->
+    <section class="relative text-center mb-16">
+        <div class="bg-black border-4 border-accent p-8 shadow-sharp transform rotate-1">
+            <div class="absolute -top-3 -left-3 w-6 h-6 bg-accent transform rotate-45"></div>
+            <div class="absolute -bottom-3 -right-3 w-8 h-8 border-2 border-white transform rotate-45"></div>
             
-            <p class="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
-                Enjoying my technical articles? Let's connect and discuss software engineering, architecture, and building great systems.
-            </p>
-            
-            <div class="flex flex-wrap gap-6 justify-center">
-                <a href="/contact" class="group relative px-8 py-4 bg-accent text-white font-bold uppercase tracking-wider border-2 border-accent overflow-hidden">
-                    <span class="relative z-10">Get In Touch</span>
-                    <div class="absolute inset-0 bg-black transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
-                </a>
-                
-                <a href="/projects" class="px-8 py-4 border-2 border-black text-black font-bold uppercase tracking-wider hover:bg-black hover:text-white transition-all duration-300">
-                    View My Work
-                </a>
+            <div class="font-mono">
+                <div class="text-green-400 mb-4 text-left">
+                    <span class="text-accent">arym@portfolio</span>:<span class="text-blue-400">~/blog</span>$ connect --with-author
+                </div>
+                <h2 class="text-4xl md:text-6xl font-black mb-6 text-white glitch-effect">CONNECTION_ESTABLISHED?</h2>
+                <p class="text-gray-300 mb-8 text-lg">
+                    >>> INTERESTED IN TECH_DISCUSSIONS?<br>
+                    >>> SYSTEM_STATUS: READY_FOR_COLLABORATION
+                </p>
+                <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                    <a href="/contact" class="radical-button magnetic-button bg-accent text-white px-8 py-4 text-xl font-black uppercase tracking-wider border-4 border-accent hover:bg-white hover:text-accent transition-all duration-300 transform hover:scale-105 shadow-sharp neon-glow">
+                        INITIATE_CONTACT
+                    </a>
+                    <a href="/projects" class="radical-button magnetic-button bg-white text-black px-8 py-4 text-xl font-black uppercase tracking-wider border-4 border-white hover:bg-accent hover:text-white transition-all duration-300 transform hover:scale-105 shadow-sharp">
+                        VIEW_PROJECTS
+                    </a>
+                </div>
             </div>
         </div>
     </section>
 </div>
 
+<!-- Enhanced JavaScript for terminal effects -->
 <script>
-// Radical Blog Page Interactions
-document.addEventListener('DOMContentLoaded', function() {
-    // Scroll reveal animation
+    // Initialize reveal on scroll animations
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
     };
-    
-    const observer = new IntersectionObserver(function(entries) {
+
+    const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('revealed');
             }
         });
     }, observerOptions);
-    
+
     // Observe all reveal elements
     document.querySelectorAll('.reveal-on-scroll').forEach(el => {
         observer.observe(el);
     });
-    
-    // Parallax effect on scroll
-    window.addEventListener('scroll', function() {
+
+    // Parallax effect for background elements
+    window.addEventListener('scroll', () => {
         const scrolled = window.pageYOffset;
-        
-        // Floating background elements parallax
-        const bgElements = document.querySelectorAll('.bg-element');
-        bgElements.forEach((element, index) => {
-            const speed = 0.2 + (index * 0.1);
-            const yPos = scrolled * speed;
-            element.style.transform = `translateY(${yPos}px) rotate(${scrolled * 0.02}deg)`;
+        const parallaxElements = document.querySelectorAll('.bg-element');
+
+        parallaxElements.forEach((element, index) => {
+            const speed = 0.1 + (index * 0.05);
+            const yPos = -(scrolled * speed);
+            element.style.transform = `translateY(${yPos}px) rotate(${45 + scrolled * 0.1}deg)`;
         });
     });
-    
-    // Add stagger animation to tech cards
-    const techCards = document.querySelectorAll('.tech-card');
-    techCards.forEach((card, index) => {
-        card.style.animationDelay = `${index * 0.1}s`;
-    });
-    
-    // Enhanced button hover effects
-    document.querySelectorAll('.radical-button').forEach(button => {
-        button.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-3px) scale(1.05)';
-            this.style.boxShadow = '0 15px 30px rgba(0,0,0,0.4)';
-        });
-        
-        button.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0) scale(1)';
-            this.style.boxShadow = 'none';
+
+    // Terminal typing effect simulation
+    document.addEventListener('DOMContentLoaded', () => {
+        const terminalOutputs = document.querySelectorAll('.terminal-window');
+        terminalOutputs.forEach(terminal => {
+            terminal.style.opacity = '0';
+            terminal.style.transform = 'translateY(20px) rotate(-1deg)';
+            setTimeout(() => {
+                terminal.style.transition = 'all 0.8s ease';
+                terminal.style.opacity = '1';
+                terminal.style.transform = 'rotate(-1deg)';
+            }, 300);
         });
     });
-});
+
+    // Magnetic button effect
+    document.querySelectorAll('.magnetic-button').forEach(button => {
+        button.addEventListener('mousemove', (e) => {
+            const rect = button.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) - rect.width / 2) * 0.1;
+            const y = ((e.clientY - rect.top) - rect.height / 2) * 0.1;
+
+            button.style.setProperty('--mouse-x', `${x}px`);
+            button.style.setProperty('--mouse-y', `${y}px`);
+        });
+
+        button.addEventListener('mouseleave', () => {
+            button.style.setProperty('--mouse-x', '0px');
+            button.style.setProperty('--mouse-y', '0px');
+        });
+    });
 </script>

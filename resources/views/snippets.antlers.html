@@ -1,0 +1,346 @@
+{{ layout = 'layout' }}
+
+<!-- Radical Background Elements -->
+<div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+    <div class="absolute top-20 left-10 w-16 h-16 bg-accent opacity-20 transform rotate-45 bg-element"></div>
+    <div class="absolute top-40 right-20 w-12 h-12 border-2 border-accent opacity-30 bg-element"></div>
+    <div class="absolute bottom-40 left-1/4 w-8 h-8 bg-black opacity-40 transform rotate-12 bg-element"></div>
+    <div class="absolute top-1/3 right-1/3 w-6 h-20 bg-accent opacity-15 transform -rotate-45 bg-element"></div>
+    <div class="absolute bottom-20 right-10 w-14 h-14 border-2 border-black opacity-25 transform rotate-45 bg-element"></div>
+</div>
+
+<div class="relative z-10 max-w-6xl mx-auto">
+    <!-- Terminal Header -->
+    <header class="text-center mb-16 reveal-on-scroll">
+        <div class="terminal-window bg-black border-4 border-accent shadow-sharp mb-8 transform -rotate-1">
+            <div class="terminal-title-bar bg-gray-800 p-3 flex items-center justify-between">
+                <div class="flex space-x-2">
+                    <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                    <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                    <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                </div>
+                <span class="text-white font-mono text-sm">~/snippets $</span>
+            </div>
+            <div class="p-6 font-mono">
+                <div class="text-green-400 mb-2">
+                    <span class="text-accent">arym@portfolio</span>:<span class="text-blue-400">~</span>$ ls code_snippets/
+                </div>
+                <h1 class="text-4xl md:text-6xl font-black text-green-400 mb-2 glitch-effect">{{ title | upper }}</h1>
+                <div class="text-gray-400">{{ content | strip_tags | truncate:80 }}</div>
+                <div class="text-cyan-400 mt-4 flex gap-8">
+                    <span>{{ collection:code_snippets | count }} SNIPPETS</span>
+                    <span>{{ taxonomy:programming_languages | count }} LANGUAGES</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Featured Snippets Section -->
+    {{ assign featured_snippets = collection:code_snippets is_featured:is="true" sort="date:desc" limit="3" }}
+    {{ if featured_snippets | count > 0 }}
+    <section class="mb-20">
+        <div class="text-center mb-12">
+            <h2 class="text-5xl md:text-7xl font-black geometric-accent glitch-effect transform -rotate-1">FEATURED</h2>
+            <div class="w-32 h-2 bg-accent mx-auto transform rotate-1 shadow-sharp mt-4"></div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {{ featured_snippets }}
+            <article class="card-sharp bg-white border-4 border-black transform hover:rotate-0 transition-all duration-300 reveal-on-scroll{{ if index % 2 == 0 }} rotate-1{{ else }} -rotate-1{{ /if }}" x-data="{ expanded: false }">
+                <div class="absolute -top-3 -right-3 px-4 py-2 bg-accent text-white font-black text-xs transform rotate-12 shadow-sharp">FEATURED</div>
+                
+                <div class="p-6">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="px-2 py-1 bg-gray-800 text-white font-mono text-xs rounded">{{ language | upper }}</span>
+                        <span class="px-2 py-1 bg-gray-100 text-gray-700 font-mono text-xs rounded">{{ difficulty | upper }}</span>
+                    </div>
+                    
+                    <h3 class="text-xl font-black mb-2 geometric-accent">{{ title }}</h3>
+                    <p class="text-gray-600 mb-4 text-sm">{{ description | truncate:100 }}</p>
+                    
+                    <div class="bg-gray-900 border-2 border-gray-700 rounded p-4 mb-4 overflow-hidden" :class="{'max-h-32': !expanded, 'max-h-none': expanded}">
+                        <pre class="text-green-400 font-mono text-xs overflow-x-auto"><code>{{ code | truncate:200 }}</code></pre>
+                    </div>
+                    
+                    <div class="flex justify-between items-center">
+                        <button @click="expanded = !expanded" class="text-accent font-mono text-sm hover:underline">
+                            <span x-text="expanded ? 'Show Less' : 'Show More'">Show More</span>
+                        </button>
+                        <a href="{{ url }}" class="button-accent text-sm">VIEW_SNIPPET</a>
+                    </div>
+                </div>
+                
+                <div class="absolute -bottom-2 -left-2 w-6 h-6 bg-accent transform rotate-45"></div>
+            </article>
+            {{ /featured_snippets }}
+        </div>
+    </section>
+    {{ /if }}
+
+    <!-- Browse by Language Section -->
+    <section class="mb-20">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-5xl font-black geometric-accent transform rotate-1">BROWSE BY LANGUAGE</h2>
+            <div class="w-24 h-1 bg-accent mx-auto mt-4"></div>
+        </div>
+        
+        <div class="bg-black border-4 border-accent p-6 mb-8 shadow-sharp font-mono">
+            <div class="text-green-400 mb-2">
+                <span class="text-accent">$</span> find ./snippets -type f | sort
+            </div>
+            <div class="text-gray-400">{{ taxonomy:programming_languages | count }} programming languages found</div>
+        </div>
+        
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {{ taxonomy:programming_languages }}
+            {{ if entries | count > 0 }}
+            <a href="#language-{{ slug }}" class="bg-black border-2 border-gray-600 text-white font-mono hover:border-accent transition-colors p-4 text-center transform hover:scale-105">
+                <div class="text-lg mb-2">{{ title }}</div>
+                <div class="text-gray-400 text-sm">{{ entries | count }} snippets</div>
+            </a>
+            {{ /if }}
+            {{ /taxonomy:programming_languages }}
+        </div>
+    </section>
+
+    <!-- All Snippets Section -->
+    <section class="mb-20" id="all-snippets">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-5xl font-black geometric-accent transform -rotate-1">ALL SNIPPETS</h2>
+            <div class="w-24 h-1 bg-accent mx-auto mt-4"></div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="snippets-grid">
+            {{ collection:code_snippets sort="date:desc" }}
+            <article class="snippet-item bg-black border-2 border-gray-600 text-white font-mono hover:border-accent transition-colors reveal-on-scroll" 
+                     x-data="{ expanded: false }" 
+                     data-language="{{ language }}">
+                <div class="bg-gray-800 p-3 border-b border-gray-600 flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <span class="text-lg">📄</span>
+                        <span class="text-green-400">{{ title | slugify }}.{{ language }}</span>
+                    </div>
+                    <span class="text-gray-400 text-xs">{{ date format="M y" }}</span>
+                </div>
+                
+                <div class="p-4">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="px-2 py-1 bg-gray-700 text-cyan-400 text-xs">{{ language | upper }}</span>
+                        <span class="px-2 py-1 bg-gray-700 text-yellow-400 text-xs">{{ difficulty | upper }}</span>
+                    </div>
+                    
+                    <h3 class="text-white font-bold mb-2">{{ title }}</h3>
+                    <p class="text-gray-300 text-sm mb-3" x-show="expanded || false">{{ description }}</p>
+                    
+                    <div class="bg-gray-900 border border-gray-700 rounded p-3 mb-3 overflow-hidden" :class="{'max-h-24': !expanded, 'max-h-64': expanded}">
+                        <pre class="text-green-400 text-xs overflow-x-auto"><code>{{ content | strip_tags }}</code></pre>
+                    </div>
+                    
+                    <div class="flex justify-between items-center">
+                        <button @click="expanded = !expanded" class="text-green-400 hover:text-accent text-xs">
+                            <span x-text="expanded ? '▲ collapse' : '▼ expand'">▼ expand</span>
+                        </button>
+                        <div class="flex gap-2">
+                            <a href="{{ url }}" class="text-green-400 hover:text-accent text-xs">→ view_full</a>
+                            {{ if external_link }}
+                            <a href="{{ external_link }}" target="_blank" class="text-blue-400 hover:text-accent text-xs">→ external</a>
+                            {{ /if }}
+                        </div>
+                    </div>
+                </div>
+            </article>
+            {{ /collection:code_snippets }}
+        </div>
+    </section>
+
+    <!-- Terminal Command Line CTA -->
+    <section class="relative text-center mb-16">
+        <div class="bg-black border-4 border-accent p-8 shadow-sharp transform rotate-1">
+            <div class="absolute -top-3 -left-3 w-6 h-6 bg-accent transform rotate-45"></div>
+            <div class="absolute -bottom-3 -right-3 w-8 h-8 border-2 border-white transform rotate-45"></div>
+            
+            <div class="font-mono">
+                <div class="text-green-400 mb-4 text-left">
+                    <span class="text-accent">arym@portfolio</span>:<span class="text-blue-400">~/snippets</span>$ git clone useful_code.git
+                </div>
+                <h2 class="text-4xl md:text-6xl font-black mb-6 text-white glitch-effect">USEFUL_CODE?</h2>
+                <p class="text-gray-300 mb-8 text-lg">
+                    >>> FOUND_SNIPPET_HELPFUL?<br>
+                    >>> SYSTEM_STATUS: READY_FOR_COLLABORATION
+                </p>
+                <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                    <a href="/contact" class="radical-button magnetic-button bg-accent text-white px-8 py-4 text-xl font-black uppercase tracking-wider border-4 border-accent hover:bg-white hover:text-accent transition-all duration-300 transform hover:scale-105 shadow-sharp neon-glow">
+                        CONTRIBUTE_CODE
+                    </a>
+                    <a href="/projects" class="radical-button magnetic-button bg-white text-black px-8 py-4 text-xl font-black uppercase tracking-wider border-4 border-white hover:bg-accent hover:text-white transition-all duration-300 transform hover:scale-105 shadow-sharp">
+                        VIEW_PROJECTS
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Enhanced JavaScript for terminal effects and language filtering -->
+<script>
+    // Language filtering functionality
+    let currentFilter = 'all';
+    
+    function filterSnippets(language) {
+        const snippets = document.querySelectorAll('.snippet-item');
+        const title = document.querySelector('#all-snippets h2');
+        
+        currentFilter = language;
+        
+        if (language === 'all') {
+            title.textContent = 'ALL SNIPPETS';
+            snippets.forEach(snippet => {
+                snippet.style.display = 'block';
+                snippet.style.opacity = '1';
+                snippet.style.transform = 'scale(1)';
+            });
+        } else {
+            title.textContent = `${language.toUpperCase()} SNIPPETS`;
+            snippets.forEach(snippet => {
+                const snippetLanguage = snippet.getAttribute('data-language');
+                if (snippetLanguage === language) {
+                    snippet.style.display = 'block';
+                    snippet.style.opacity = '1';
+                    snippet.style.transform = 'scale(1)';
+                } else {
+                    snippet.style.opacity = '0.3';
+                    snippet.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        if (currentFilter === language) {
+                            snippet.style.display = 'none';
+                        }
+                    }, 300);
+                }
+            });
+        }
+        
+        // Update URL hash
+        window.location.hash = language === 'all' ? '' : `language-${language}`;
+        
+        // Scroll to snippets section
+        document.getElementById('all-snippets').scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'start' 
+        });
+    }
+    
+    // Handle hash navigation on page load
+    function handleInitialHash() {
+        const hash = window.location.hash;
+        if (hash.startsWith('#language-')) {
+            const language = hash.replace('#language-', '');
+            filterSnippets(language);
+        }
+    }
+    
+    // Initialize reveal on scroll animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+            }
+        });
+    }, observerOptions);
+
+    // Observe all reveal elements
+    document.querySelectorAll('.reveal-on-scroll').forEach(el => {
+        observer.observe(el);
+    });
+
+    // Parallax effect for background elements
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const parallaxElements = document.querySelectorAll('.bg-element');
+
+        parallaxElements.forEach((element, index) => {
+            const speed = 0.1 + (index * 0.05);
+            const yPos = -(scrolled * speed);
+            element.style.transform = `translateY(${yPos}px) rotate(${45 + scrolled * 0.1}deg)`;
+        });
+    });
+
+    // Terminal typing effect simulation
+    document.addEventListener('DOMContentLoaded', () => {
+        const terminalOutputs = document.querySelectorAll('.terminal-window');
+        terminalOutputs.forEach(terminal => {
+            terminal.style.opacity = '0';
+            terminal.style.transform = 'translateY(20px) rotate(-1deg)';
+            setTimeout(() => {
+                terminal.style.transition = 'all 0.8s ease';
+                terminal.style.opacity = '1';
+                terminal.style.transform = 'rotate(-1deg)';
+            }, 300);
+        });
+        
+        // Setup language filtering
+        setupLanguageFiltering();
+        
+        // Handle initial hash
+        handleInitialHash();
+    });
+    
+    function setupLanguageFiltering() {
+        // Add click handlers to language links
+        const languageLinks = document.querySelectorAll('a[href^="#language-"]');
+        languageLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const language = link.getAttribute('href').replace('#language-', '');
+                filterSnippets(language);
+            });
+        });
+        
+        // Add "Show All" button
+        const browseSection = document.querySelector('#all-snippets .text-center');
+        if (browseSection) {
+            const showAllButton = document.createElement('button');
+            showAllButton.innerHTML = '← SHOW ALL SNIPPETS';
+            showAllButton.className = 'mt-4 px-4 py-2 bg-accent text-white font-mono text-sm hover:bg-white hover:text-accent transition-colors border-2 border-accent';
+            showAllButton.style.display = 'none';
+            showAllButton.addEventListener('click', () => {
+                filterSnippets('all');
+                showAllButton.style.display = 'none';
+            });
+            
+            browseSection.appendChild(showAllButton);
+            
+            // Show/hide the button based on current filter
+            window.addEventListener('hashchange', () => {
+                if (window.location.hash && window.location.hash.startsWith('#language-')) {
+                    showAllButton.style.display = 'inline-block';
+                } else {
+                    showAllButton.style.display = 'none';
+                }
+            });
+        }
+    }
+
+    // Magnetic button effect
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.magnetic-button').forEach(button => {
+            button.addEventListener('mousemove', (e) => {
+                const rect = button.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) - rect.width / 2) * 0.1;
+                const y = ((e.clientY - rect.top) - rect.height / 2) * 0.1;
+
+                button.style.setProperty('--mouse-x', `${x}px`);
+                button.style.setProperty('--mouse-y', `${y}px`);
+            });
+
+            button.addEventListener('mouseleave', () => {
+                button.style.setProperty('--mouse-x', '0px');
+                button.style.setProperty('--mouse-y', '0px');
+            });
+        });
+    });
+</script>

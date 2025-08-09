@@ -1,102 +1,201 @@
 {{ layout = 'layout' }}
 
-<div class="max-w-6xl mx-auto">
-    <!-- Page Header -->
-    <header class="text-center mb-12">
-        <h1 class="geometric-accent mb-4">{{ title }}</h1>
-        <div class="w-24 h-1 bg-accent mx-auto mb-6"></div>
-        <div class="prose prose-lg max-w-2xl mx-auto">
-            {{ content }}
+<!-- Radical Background Elements (Following Contact Page Pattern) -->
+<div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+    <div class="absolute top-20 left-10 w-16 h-16 bg-accent opacity-20 transform rotate-45 bg-element"></div>
+    <div class="absolute top-40 right-20 w-12 h-12 border-2 border-accent opacity-30 bg-element"></div>
+    <div class="absolute bottom-40 left-1/4 w-8 h-8 bg-black opacity-40 transform rotate-12 bg-element"></div>
+    <div class="absolute top-1/3 right-1/3 w-6 h-20 bg-accent opacity-15 transform -rotate-45 bg-element"></div>
+    <div class="absolute bottom-20 right-10 w-14 h-14 border-2 border-black opacity-25 transform rotate-45 bg-element"></div>
+</div>
+
+<div class="relative z-10 max-w-6xl mx-auto">
+    <!-- Terminal Header -->
+    <header class="text-center mb-16 reveal-on-scroll">
+        <div class="terminal-window bg-black border-4 border-accent shadow-sharp mb-8 transform -rotate-1">
+            <div class="terminal-title-bar bg-gray-800 p-3 flex items-center justify-between">
+                <div class="flex space-x-2">
+                    <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                    <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                    <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                </div>
+                <span class="text-white font-mono text-sm">~/projects $</span>
+            </div>
+            <div class="p-6 font-mono">
+                <div class="text-green-400 mb-2">
+                    <span class="text-accent">arym@portfolio</span>:<span class="text-blue-400">~</span>$ ls -la projects/
+                </div>
+                <h1 class="text-4xl md:text-6xl font-black text-green-400 mb-2 glitch-effect">{{ title | upper }}</h1>
+                <div class="text-gray-400">{{ content | strip_tags | truncate:80 }}</div>
+            </div>
         </div>
     </header>
 
-    <!-- Featured Projects -->
-    <section class="mb-16">
-        <h2 class="text-3xl font-bold mb-8 geometric-accent">Featured Projects</h2>
+    <!-- Featured Projects Section -->
+    <section class="mb-20">
+        <div class="text-center mb-12">
+            <h2 class="text-5xl md:text-7xl font-black geometric-accent glitch-effect transform -rotate-1">FEATURED</h2>
+            <div class="w-32 h-2 bg-accent mx-auto transform rotate-1 shadow-sharp mt-4"></div>
+        </div>
+        
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {{ collection:projects sort="date:desc" is_featured:is="true" }}
-                <article class="card-sharp hover:transform hover:-translate-y-1 transition-all duration-300">
+                <article class="card-sharp bg-white border-4 border-black transform hover:rotate-0 transition-all duration-300 reveal-on-scroll{{ if index % 2 == 0 }} rotate-1{{ else }} -rotate-1{{ /if }}" 
+                         x-data="{ hover: false }"
+                         @mouseenter="hover = true"
+                         @mouseleave="hover = false">
+                    
+                    <!-- Project Type Badge -->
+                    <div class="absolute -top-3 -right-3 px-4 py-2 bg-accent text-white font-black text-xs transform rotate-12 shadow-sharp">
+                        {{ project_type | upper }}
+                    </div>
+                    
                     {{ if featured_image }}
-                        <div class="mb-6">
-                            <img src="{{ featured_image }}" alt="{{ title }}" class="w-full h-64 object-cover rounded">
+                        <div class="mb-6 overflow-hidden">
+                            <img src="{{ featured_image }}" alt="{{ title }}" class="w-full h-64 object-cover border-b-4 border-black">
                         </div>
                     {{ /if }}
                     
-                    <div class="flex justify-between items-start mb-3">
-                        <span class="px-3 py-1 bg-accent text-white text-sm rounded-full">{{ project_type | title }}</span>
-                        <span class="px-3 py-1 bg-gray-100 text-sm rounded-full">{{ status | title }}</span>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-black mb-2 geometric-accent">{{ title | upper }}</h3>
+                        <p class="text-lg text-gray-600 mb-4">{{ subtitle }}</p>
+                        
+                        <div class="prose mb-6">
+                            {{ description | truncate:150 }}
+                        </div>
+                        
+                        <!-- Status and Year -->
+                        <div class="flex justify-between items-center mb-6">
+                            <span class="px-3 py-1 bg-black text-white font-mono text-sm">{{ status | upper }}</span>
+                            <span class="text-gray-500 font-mono">{{ date format="Y" }}</span>
+                        </div>
+                        
+                        <!-- Tech Stack -->
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            {{ technologies limit="4" }}
+                                <span class="px-2 py-1 bg-gray-100 border-2 border-gray-300 text-xs font-mono">{{ value }}</span>
+                            {{ /technologies }}
+                        </div>
+                        
+                        <!-- Action Buttons -->
+                        <div class="flex gap-4 flex-wrap">
+                            {{ if live_url }}
+                                <a href="{{ live_url }}" target="_blank" class="button-accent">LAUNCH</a>
+                            {{ /if }}
+                            {{ if github_url }}
+                                <a href="{{ github_url }}" target="_blank" class="button-sharp">SOURCE</a>
+                            {{ /if }}
+                            <a href="{{ url }}" class="bg-white text-accent border-2 border-accent px-4 py-2 font-bold hover:bg-accent hover:text-white transition-all">DETAILS</a>
+                        </div>
                     </div>
                     
-                    <h3 class="text-2xl font-bold mb-2">{{ title }}</h3>
-                    <p class="text-lg text-gray-600 mb-4">{{ subtitle }}</p>
-                    
-                    <div class="prose mb-6">
-                        {{ description | truncate:200 }}
-                    </div>
-                    
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        {{ technologies }}
-                            <span class="px-2 py-1 bg-gray-100 text-sm rounded">{{ value }}</span>
-                        {{ /technologies }}
-                    </div>
-                    
-                    <div class="flex gap-4">
-                        {{ if live_url }}
-                            <a href="{{ live_url }}" target="_blank" class="button-accent">Live Demo</a>
-                        {{ /if }}
-                        {{ if github_url }}
-                            <a href="{{ github_url }}" target="_blank" class="button-sharp">Source Code</a>
-                        {{ /if }}
-                        <a href="{{ url }}" class="text-accent font-medium hover:underline">Learn More →</a>
-                    </div>
+                    <!-- Decorative Elements -->
+                    <div class="absolute -bottom-2 -left-2 w-6 h-6 bg-accent transform rotate-45"></div>
                 </article>
             {{ /collection:projects }}
         </div>
     </section>
 
-    <!-- All Projects -->
-    <section class="mb-16">
-        <h2 class="text-3xl font-bold mb-8 geometric-accent">All Projects</h2>
+    <!-- All Projects: Terminal Style -->
+    <section class="relative mb-20">
+        <!-- Diagonal separator -->
+        <div class="absolute -top-10 left-0 right-0 h-20 bg-accent opacity-10 transform -skew-y-1"></div>
         
-        <!-- Filter by Technology (Future Enhancement) -->
-        <div class="mb-8 text-center">
-            <p class="text-gray-600">Filter functionality coming soon...</p>
-        </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {{ collection:projects sort="date:desc" }}
-                <article class="card-sharp hover:transform hover:-translate-y-1 transition-all duration-300">
-                    {{ if featured_image }}
-                        <img src="{{ featured_image }}" alt="{{ title }}" class="w-full h-48 object-cover mb-4 rounded">
-                    {{ /if }}
-                    
-                    <div class="flex justify-between items-center mb-3">
-                        <span class="px-2 py-1 bg-gray-100 text-xs rounded">{{ project_type | title }}</span>
-                        <time class="text-sm text-gray-500">{{ date format="Y" }}</time>
-                    </div>
-                    
-                    <h3 class="text-xl font-bold mb-2">{{ title }}</h3>
-                    <p class="text-gray-600 mb-4">{{ subtitle }}</p>
-                    
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        {{ technologies limit="3" }}
-                            <span class="px-2 py-1 bg-gray-100 text-xs rounded">{{ value }}</span>
-                        {{ /technologies }}
-                    </div>
-                    
-                    <div class="flex justify-between items-center">
-                        <a href="{{ url }}" class="text-accent font-medium hover:underline">View Details</a>
-                        <div class="flex gap-2">
-                            {{ if live_url }}
-                                <a href="{{ live_url }}" target="_blank" class="text-gray-600 hover:text-accent" title="Live Demo">🚀</a>
-                            {{ /if }}
-                            {{ if github_url }}
-                                <a href="{{ github_url }}" target="_blank" class="text-gray-600 hover:text-accent" title="Source Code">💻</a>
-                            {{ /if }}
+        <div class="relative z-10 transform rotate-0.5">
+            <div class="bg-black border-4 border-accent p-6 mb-8 shadow-sharp font-mono">
+                <div class="text-green-400 mb-2">
+                    <span class="text-accent">$</span> grep -r "project" ./portfolio | sort -k2
+                </div>
+                <div class="text-gray-400">{{ collection:projects | length }} projects found</div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {{ collection:projects sort="date:desc" }}
+                    <article class="bg-black border-2 border-gray-600 text-white font-mono text-sm hover:border-accent transition-colors cursor-pointer reveal-on-scroll"
+                             x-data="{ expanded: false }"
+                             @click="expanded = !expanded">
+                        
+                        <div class="bg-gray-800 p-3 border-b border-gray-600 flex items-center gap-3">
+                            <span class="text-lg">{{ project_type == 'web_app' ? '🌐' : project_type == 'mobile_app' ? '📱' : project_type == 'api' ? '⚡' : project_type == 'game' ? '🎮' : '💻' }}</span>
+                            <span class="text-green-400 flex-1">{{ title | slugify }}.{{ project_type | truncate:3:'' }}</span>
+                            <span class="text-gray-400 text-xs">{{ date format="M y" }}</span>
                         </div>
-                    </div>
-                </article>
-            {{ /collection:projects }}
+                        
+                        <div class="p-4" :class="{'h-24 overflow-hidden': !expanded, 'h-auto': expanded}">
+                            {{ if featured_image && expanded }}
+                                <img src="{{ featured_image }}" alt="{{ title }}" class="w-full h-32 object-cover mb-3 border border-gray-600">
+                            {{ /if }}
+                            
+                            <h4 class="text-white font-bold text-base mb-2">{{ title }}</h4>
+                            <p class="text-gray-300 text-sm mb-3" x-show="expanded">{{ subtitle }}</p>
+                            
+                            <div class="flex flex-wrap gap-1 mb-3" x-show="expanded">
+                                {{ technologies limit="3" }}
+                                    <code class="bg-gray-700 text-blue-400 px-1 py-0.5 text-xs">{{ value }}</code>
+                                {{ /technologies }}
+                            </div>
+                            
+                            <div class="space-y-1" x-show="expanded">
+                                {{ if live_url }}
+                                    <a href="{{ live_url }}" target="_blank" class="block text-green-400 hover:text-accent text-xs">→ live_demo</a>
+                                {{ /if }}
+                                {{ if github_url }}
+                                    <a href="{{ github_url }}" target="_blank" class="block text-green-400 hover:text-accent text-xs">→ source_code</a>
+                                {{ /if }}
+                                <a href="{{ url }}" class="block text-green-400 hover:text-accent text-xs">→ full_details</a>
+                            </div>
+                        </div>
+                    </article>
+                {{ /collection:projects }}
+            </div>
         </div>
     </section>
 </div>
+
+<!-- Enhanced JavaScript for terminal effects -->
+<script>
+    // Initialize reveal on scroll animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+            }
+        });
+    }, observerOptions);
+
+    // Observe all reveal elements
+    document.querySelectorAll('.reveal-on-scroll').forEach(el => {
+        observer.observe(el);
+    });
+
+    // Parallax effect for background elements
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const parallaxElements = document.querySelectorAll('.bg-element');
+
+        parallaxElements.forEach((element, index) => {
+            const speed = 0.1 + (index * 0.05);
+            const yPos = -(scrolled * speed);
+            element.style.transform = `translateY(${yPos}px) rotate(${45 + scrolled * 0.1}deg)`;
+        });
+    });
+
+    // Terminal typing effect simulation
+    document.addEventListener('DOMContentLoaded', () => {
+        const terminalOutputs = document.querySelectorAll('.terminal-window');
+        terminalOutputs.forEach(terminal => {
+            terminal.style.opacity = '0';
+            terminal.style.transform = 'translateY(20px) rotate(-1deg)';
+            setTimeout(() => {
+                terminal.style.transition = 'all 0.8s ease';
+                terminal.style.opacity = '1';
+                terminal.style.transform = 'rotate(-1deg)';
+            }, 300);
+        });
+    });
+</script>

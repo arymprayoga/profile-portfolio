@@ -197,6 +197,54 @@ h3 {
   width: 100%;
 }
 
+/* Enhanced terminal and glitch effects for projects page */
+.terminal-window {
+  box-shadow: var(--shadow-sharp);
+}
+
+.glitch-effect {
+  animation: glitch 0.3s ease-in-out infinite alternate;
+}
+
+@keyframes glitch {
+  0% {
+    transform: translate(0);
+    filter: hue-rotate(0deg);
+  }
+  20% {
+    transform: translate(-1px, 1px);
+    filter: hue-rotate(90deg);
+  }
+  40% {
+    transform: translate(-1px, -1px);
+    filter: hue-rotate(180deg);
+  }
+  60% {
+    transform: translate(1px, 1px);
+    filter: hue-rotate(270deg);
+  }
+  80% {
+    transform: translate(1px, -1px);
+    filter: hue-rotate(360deg);
+  }
+  100% {
+    transform: translate(0);
+    filter: hue-rotate(0deg);
+  }
+}
+
+/* Reveal animations */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease;
+}
+
+.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .nav-link:hover {
   color: #ff0066;
 }
@@ -319,15 +367,140 @@ article code {
   z-index: -10 !important;
 }
 
+/* SNIPPETS PAGE TERMINAL SECTION FIXES */
+
+/* Terminal sections must have white text on black backgrounds */
+.bg-black,
+.bg-black *,
+.bg-gray-800,
+.bg-gray-800 *,
+.bg-gray-900,
+.bg-gray-900 * {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+/* Specific terminal text colors */
+.bg-black .text-green-400,
+.bg-gray-800 .text-green-400,
+.bg-gray-900 .text-green-400 {
+  color: #4ade80 !important;
+}
+
+.bg-black .text-gray-400,
+.bg-gray-800 .text-gray-400,
+.bg-gray-900 .text-gray-400 {
+  color: #9ca3af !important;
+}
+
+.bg-black .text-cyan-400,
+.bg-gray-800 .text-cyan-400,
+.bg-gray-900 .text-cyan-400 {
+  color: #22d3ee !important;
+}
+
+.bg-black .text-yellow-400,
+.bg-gray-800 .text-yellow-400,
+.bg-gray-900 .text-yellow-400 {
+  color: #facc15 !important;
+}
+
+.bg-black .text-blue-400,
+.bg-gray-800 .text-blue-400,
+.bg-gray-900 .text-blue-400 {
+  color: #60a5fa !important;
+}
+
+.bg-black .text-white,
+.bg-gray-800 .text-white,
+.bg-gray-900 .text-white {
+  color: #ffffff !important;
+}
+
+/* Snippet items with black backgrounds */
+.snippet-item.bg-black,
+.snippet-item.bg-black * {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+.snippet-item.bg-black h3 {
+  color: #ffffff !important;
+}
+
+.snippet-item.bg-black .text-gray-300 {
+  color: #d1d5db !important;
+}
+
+/* Terminal windows */
+.terminal-window,
+.terminal-window * {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+.terminal-window .text-green-400 {
+  color: #4ade80 !important;
+}
+
+.terminal-window .text-gray-400 {
+  color: #9ca3af !important;
+}
+
 /* COMPREHENSIVE TAG AND ELEMENT VISIBILITY FIXES */
 
-/* All background-gray elements need dark text */
+/* Gray background elements that should have dark text */
 .bg-gray-100,
 .bg-gray-50,
-.bg-gray-200,
-[class*="bg-gray"] {
+.bg-gray-200 {
   background-color: #f3f4f6 !important;
   color: #1f2937 !important;
+}
+
+/* Dark gray elements that should have light text */
+.bg-gray-600,
+.bg-gray-700,
+.bg-gray-800,
+.bg-gray-900 {
+  color: #ffffff !important;
+}
+
+/* Border elements that aren't fully black */
+.border-2.border-gray-600,
+.border-gray-600 {
+  border-color: #4b5563 !important;
+}
+
+/* Language links in terminal sections */
+a.bg-black.border-2.border-gray-600,
+a.bg-black {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border-color: #4b5563 !important;
+}
+
+a.bg-black:hover {
+  border-color: #ff0066 !important;
+  color: #ffffff !important;
+}
+
+/* Snippet card elements */
+.bg-gray-700.text-cyan-400,
+.bg-gray-700.text-yellow-400 {
+  background-color: #374151 !important;
+  color: inherit !important;
+}
+
+/* Language navigation buttons - ensure all text is white */
+a.bg-black.border-2.border-gray-600 div,
+a.bg-black div,
+.bg-black .text-lg,
+.bg-black .text-sm {
+  color: #ffffff !important;
+}
+
+.bg-black .text-gray-400 {
+  color: #9ca3af !important;
 }
 
 /* Technology tags - most common pattern */
