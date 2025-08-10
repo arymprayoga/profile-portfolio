@@ -97,7 +97,7 @@
                 
                 <!-- Code content -->
                 <div class="relative overflow-hidden">
-                    <pre class="p-6 overflow-x-auto text-green-400 font-mono text-sm leading-relaxed" id="code-content"><code>{{ code | strip_tags }}</code></pre>
+                    <pre class="p-6 overflow-x-auto text-green-400 font-mono text-sm leading-relaxed" id="code-content"><code>{{ content | strip_tags }}</code></pre>
                     
                     <!-- Scrolling indicator -->
                     <div class="absolute top-4 right-4 text-accent opacity-50 font-mono text-xs animate-pulse">
@@ -109,7 +109,7 @@
                 <div class="bg-gray-800 p-4 border-t-2 border-accent">
                     <div class="text-green-400 font-mono text-sm">
                         <span class="text-accent">$</span> echo "Code execution completed successfully"
-                        <div class="text-gray-400 mt-1">→ Lines: {{ content | strip_tags | split:'\n' | count }}</div>
+                        <div class="text-gray-400 mt-1">→ Lines: Loading...</div>
                     </div>
                 </div>
             </div>
@@ -117,7 +117,7 @@
             <!-- Performance Metrics -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 reveal-on-scroll">
                 <div class="bg-black border-2 border-gray-600 text-white font-mono p-4 text-center transform hover:scale-105 transition-all">
-                    <div class="text-accent text-2xl font-bold">{{ code | strip_tags | split:'\n' | count }}</div>
+                    <div class="text-accent text-2xl font-bold" id="line-count">-</div>
                     <div class="text-gray-400 text-xs">LINES_OF_CODE</div>
                 </div>
                 <div class="bg-black border-2 border-gray-600 text-white font-mono p-4 text-center transform hover:scale-105 transition-all">
@@ -383,6 +383,19 @@
         }
 
         enhanceCodeDisplay();
+        
+        // Count lines of code and update displays
+        const codeElement = document.getElementById('code-content');
+        const lineCountElement = document.getElementById('line-count');
+        const lineInfoElement = document.querySelector('.text-gray-400 mt-1');
+        
+        if (codeElement && lineCountElement) {
+            const lineCount = codeElement.textContent.split('\n').length;
+            lineCountElement.textContent = lineCount;
+            if (lineInfoElement) {
+                lineInfoElement.textContent = `→ Lines: ${lineCount}`;
+            }
+        }
 
         // Progress indicator for long code
         function addProgressIndicator() {

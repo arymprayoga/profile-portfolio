@@ -39,6 +39,7 @@ tabs:
                 python: Python
                 go: Go
                 ruby: Ruby
+                csharp: C#
                 sql: SQL
                 html: HTML
                 css: CSS
@@ -65,7 +66,7 @@ tabs:
           -
             handle: use_cases
             field:
-              type: tags
+              type: list
               display: Use Cases
               instructions: When/where this code snippet would be useful
           -
@@ -74,6 +75,13 @@ tabs:
               type: toggle
               display: Featured Snippet
               default: false
+          -
+            handle: date
+            field:
+              type: date
+              display: Date
+              required: true
+              instructions: When this code snippet was created
           -
             handle: external_link
             field:
