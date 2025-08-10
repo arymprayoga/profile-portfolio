@@ -80,6 +80,7 @@
                         <div>
                             <h3 class="font-bold mb-4">{{ title }}</h3>
                             <ul class="space-y-2">
+                                {{ if children }}
                                 {{ children }}
                                     <li>
                                         <a href="{{ url }}" {{ if target }}target="{{ target }}"{{ /if }} class="text-gray-600 hover:text-black transition-colors">
@@ -87,6 +88,7 @@
                                         </a>
                                     </li>
                                 {{ /children }}
+                                {{ /if }}
                             </ul>
                         </div>
                     {{ /nav:footer }}
